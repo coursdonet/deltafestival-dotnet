@@ -921,7 +921,7 @@
   },
   "libraries": {
     "Microsoft.EntityFrameworkCore/2.2.2": {
-      "sha512": "/j1tKR7x0wCnm9oSlfgBuh8n1aTZEVf+Aehi0AVMdDeFOnfvY4YrzIz6lsnApY/GfHUA/qyinb0e53ZpIla73Q==",
+      "sha512": "WBQhms1wB9V43TRXB/V8qUw8j8dEI2Ew5LZvqkBYct6khD9QpIuVpzUtUwJATOFC8WKaGgowSA0E0L7pNoLQfw==",
       "type": "package",
       "path": "microsoft.entityframeworkcore/2.2.2",
       "files": [
@@ -934,7 +934,7 @@
       ]
     },
     "Microsoft.EntityFrameworkCore.Abstractions/2.2.2": {
-      "sha512": "qhT7GxIoMldafNNxPXUKNVtxCGk8mH2MXgGO/yJCsN1bsP1jhkDLVmpLAS0Mz0uGIZvGxuIWF5HQ+lCLwHacCg==",
+      "sha512": "qTR9OSjKEoxxoZ/G/XbSPZsdxueiWUHgWU+XrOfQAm4+dcY0XEenR4BXT5gQeVGzPrLsQb3loQhgjmKKLdI5LA==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.abstractions/2.2.2",
       "files": [
@@ -947,7 +947,7 @@
       ]
     },
     "Microsoft.EntityFrameworkCore.Analyzers/2.2.2": {
-      "sha512": "0EHbLoFkbjhD/9prSNyvETsRleYNa38QeadLNlaKJSAm8l7sQN451rk/WOKL2BOUO5RfA4IcRqCc2g3wWo06GA==",
+      "sha512": "t+9kW6MwDDrGPPx15c2AIE2f6DM9nbGcHThagg9rcUZz6shmC8LS1Qhd5TSocKHmJafa+hHhBfDNGPyDDeNfHQ==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.analyzers/2.2.2",
       "files": [
@@ -959,7 +959,7 @@
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/2.2.2": {
-      "sha512": "TxEceodhB3WUCi9SLXHQYgCF7sgU1Se1RnJ/RMwW0ETNM1T2s5OUEEP4njfRmXOfInjgy0fkpMjP+0pV6ieKVQ==",
+      "sha512": "k0euxFNySwWj6+gdBrQGDRqZTrI685f/0btdMVJxun42fYozYmShxrSQPoT7LfGK6Z80m1R9obWwFWOSHNL9gQ==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.relational/2.2.2",
       "files": [
@@ -972,7 +972,7 @@
       ]
     },
     "Microsoft.EntityFrameworkCore.SqlServer/2.2.2": {
-      "sha512": "xC9tZvGArwC2cZ2g+Fl80lX8lmo4sC8IR5OH4cH0TuqUsCzIp12srIx3ldAh+kRj+vD4JhqU+zsfaCxDfoeFYA==",
+      "sha512": "6KykeLQIsxDPIXwZxVT7IfldHQtH0NYbRTpzJ/8LxGzquc3RXEeUQPNGLZd3qHWQqD7TZaSX9xGlPbsEnHXWyw==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.sqlserver/2.2.2",
       "files": [
@@ -3483,23 +3483,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lucas\\.nuget\\packages\\": {},
+    "C:\\Users\\Remy\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucas\\source\\Workspaces\\Workspace\\DeltaFestival_Proto\\main\\DeltaFestival\\Database\\Database.csproj",
+      "projectUniqueName": "C:\\Users\\Remy\\Desktop\\Ynov\\Mobile .Net\\Project\\deltafestival-dotnet\\Database\\Database.csproj",
       "projectName": "Database",
-      "projectPath": "C:\\Users\\lucas\\source\\Workspaces\\Workspace\\DeltaFestival_Proto\\main\\DeltaFestival\\Database\\Database.csproj",
-      "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lucas\\source\\Workspaces\\Workspace\\DeltaFestival_Proto\\main\\DeltaFestival\\Database\\obj\\",
+      "projectPath": "C:\\Users\\Remy\\Desktop\\Ynov\\Mobile .Net\\Project\\deltafestival-dotnet\\Database\\Database.csproj",
+      "packagesPath": "C:\\Users\\Remy\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Remy\\Desktop\\Ynov\\Mobile .Net\\Project\\deltafestival-dotnet\\Database\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Remy\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3512,8 +3512,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\lucas\\source\\Workspaces\\Workspace\\DeltaFestival_Proto\\main\\DeltaFestival\\Entities\\Entities.csproj": {
-              "projectPath": "C:\\Users\\lucas\\source\\Workspaces\\Workspace\\DeltaFestival_Proto\\main\\DeltaFestival\\Entities\\Entities.csproj"
+            "C:\\Users\\Remy\\Desktop\\Ynov\\Mobile .Net\\Project\\deltafestival-dotnet\\Entities\\Entities.csproj": {
+              "projectPath": "C:\\Users\\Remy\\Desktop\\Ynov\\Mobile .Net\\Project\\deltafestival-dotnet\\Entities\\Entities.csproj"
             }
           }
         }

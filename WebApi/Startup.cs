@@ -91,6 +91,10 @@ namespace WebApi
             services.AddDbContext<BrownContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("BrownDb")
                 , x => x.MigrationsAssembly("Database")));
+
+            services.AddDbContext<MapContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("BlondeDb")
+                , x => x.MigrationsAssembly("Database")));
             #endregion
 
             //AutoMapper
