@@ -1,8 +1,9 @@
-using System;
-using System.IO;
-using System.Reflection;
 using AutoMapper;
 using Database;
+using DeltaFestival.IRepository;
+using DeltaFestival.Repository;
+using DeltaFestivalAPI.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
+using System.Text;
 using WebApi.Filters;
 
 namespace WebApi
@@ -54,16 +58,24 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors()
 
-            //cors
-            services.AddCors();
-           
-            services.AddMvcCore(options =>
+            //#region DI
+            //    // Add useful interface for accessing the ActionContext outside a controller.
+            //    .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
+            //    // Add useful interface for accessing the HttpContext outside a controller.
+            //    .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
+            //    // Add useful interface for accessing the IUrlHelper outside a controller.
+            //    .AddScoped<IUrlHelper>(x => x
+            //        .GetRequiredService<IUrlHelperFactory>()
+            //        .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
+            //#endregion
+
+                    .AddMvcCore(options =>
                 {
                     options.Filters.Add(new CacheControlFilter());  // Add "Cache-Control" header. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cache-control
-                    options.Filters.Add(new ApiExceptionFilterAttribute());
                 })
-               .AddApiExplorer()
+                .AddApiExplorer()
                 .AddJsonFormatters()    // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#content-formatting
                 .AddJsonOptions(options =>
                 {
@@ -79,10 +91,10 @@ namespace WebApi
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            #region DB & context 
             services.AddDbContext<EfContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("FestivalDb")
                 , x => x.MigrationsAssembly("Database")));
+
 
             services.AddDbContext<CpContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("CheckpointDb")
@@ -101,10 +113,46 @@ namespace WebApi
             services.AddAutoMapper();   // Check out Configuration/AutoMapperProfiles/DefaultProfile to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#automapper
 
 
-            // Register the Swagger generator, defining 1 or more Swagger documents      
+            // Register the Swagger generator, defining 1 or more Swagger documents
+
+
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Delta Festival Swagger", Version = "v1" });
+            });
+
+
+
+            services.Add(new ServiceDescriptor(typeof(IMoodRepository), typeof(MoodRepository), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IPublicationRepository), typeof(PublicationRepository), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRoleRepository), typeof(RoleRepository), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IUserRepository), typeof(UserRepository), ServiceLifetime.Transient));
+            //services.Add(new ServiceDescriptor(typeof()))
+
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes("TESTTOKEN");
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
             });
 
 
@@ -114,52 +162,29 @@ namespace WebApi
         {
             if (env.IsDevelopment())
             {
-               app.UseDeveloperExceptionPage();
-
-
+                app.UseDeveloperExceptionPage();
             }
             else
             {
                 app.UseHsts();
             }
-            
-           
-            // app.UseStatusCodePagesWithReExecute("Error/{0}");
-            // app.UseExceptionHandler("/Error/500");
-            app.UseStaticFiles();
+
+            app.UseAuthentication();
+
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
 
             app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-            // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("../swagger/v1/swagger.json", "API V1");
+                c.SwaggerEndpoint("./v1/swagger.json", "Api v1");
             });
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
-
-            //custom routes if need
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=test}/{action=get}/{id?}");
-            });
-            //Conventional routing
-            app.UseMvcWithDefaultRoute();
-
-            //Catch-all route
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "catch-all",
-                    template: "{*url}",
-                    defaults: new { controller = "Error", action = "Message" });
-                ;
-            });
-
         }
     }
 }

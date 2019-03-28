@@ -15,6 +15,7 @@ namespace Entities
 
         public float lat { get; set; }
         public float longi { get; set; }
+
         //todo add posi
 
     }
