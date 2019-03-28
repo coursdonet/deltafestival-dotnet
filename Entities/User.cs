@@ -1,8 +1,4 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
@@ -14,13 +10,13 @@ namespace Entities
 
         //  public string Password { get; set; }
 
-        //  public string Pseudo { get; set; }
+        public string Pseudo { get; set; }
 
         public int UserRoleId { get; set; }
         public virtual UserRole Role { get; set; }
 
         public int MoodId { get; set; }
-        public Mood ActualMood { get; set; }
+        public virtual Mood ActualMood { get; set; }
 
         public ICollection<Publication> Publications { get; set; }
 

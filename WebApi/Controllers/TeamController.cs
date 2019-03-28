@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using WebApi.Interfaces;
 using Entities;
+using Microsoft.AspNetCore.Mvc;
+using WebApi.Interfaces;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,7 +12,13 @@ namespace WebApi.Controllers
     [ApiController]
     public class TeamController : ControllerBase
     {
+
         private readonly IRepositoryWrapper repository;
+
+        public TeamController(IRepositoryWrapper repository)
+        {
+            this.repository = repository;
+        }
 
         [HttpGet]
         public async Task<IActionResult> List()

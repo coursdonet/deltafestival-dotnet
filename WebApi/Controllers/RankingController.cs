@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Entities;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Interfaces;
 
@@ -16,16 +13,20 @@ namespace WebApi.Controllers
     {
         private readonly IRepositoryWrapper repository;
 
-
+        public RankingController(IRepositoryWrapper repository)
+        {
+            this.repository = repository;
+        }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> RankingBetweenTeam(int id, [FromBody] int count) {
+        public async Task<IActionResult> RankingBetweenTeam(int id, [FromBody] int count)
+        {
             try
             {
                 var item = await repository.Team.GetTeamByIdAsync(id);
                 if (item == null)
                 {
-                    return NotFound(TeamErrorCode.RecordNotFound.ToString());
+                    return NotFound();
                 }
                 return Ok(await repository.Ranking.GetRankingBetweenTeamAsync(id, count));
             }
@@ -36,7 +37,8 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Ranking() {
+        public async Task<IActionResult> Ranking()
+        {
             try
             {
                 return Ok(await repository.Ranking.GetRankingAsync());

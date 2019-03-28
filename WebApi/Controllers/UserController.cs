@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Interfaces;
-using Entities;
 
 
 namespace WebApi.Controllers
@@ -17,6 +14,11 @@ namespace WebApi.Controllers
     {
         private readonly IRepositoryWrapper repository;
 
+        public UserController(IRepositoryWrapper repository)
+        {
+            this.repository = repository;
+        }
+
         [HttpGet]
         public async Task<IActionResult> List()
         {
@@ -24,20 +26,22 @@ namespace WebApi.Controllers
             {
                 var users = await repository.User.GetAllUsersAsync();
                 return Ok(users);
-            }catch (Exception e){
+            }
+            catch (Exception e)
+            {
                 return StatusCode(500, "Internal server error");
             }
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetbyId (int id)
+        public async Task<IActionResult> GetbyId(int id)
         {
             try
             {
                 var user = await repository.User.GetUserByIdAsync(id);
                 if (user == null)
                 {
-                    return NotFound(UserErrorCode.RecordNotFound.ToString());
+                    return NotFound();
                 }
                 return Ok(user);
             }
@@ -54,18 +58,18 @@ namespace WebApi.Controllers
             {
                 if (user == null || !ModelState.IsValid)
                 {
-                    return BadRequest(UserErrorCode.UserPseudonymeAndEtatRequired.ToString());
+                    return BadRequest();
                 }
-                    
+
                 if (await repository.User.GetUserByIdAsync(user.Id) != null)
                 {
-                    return StatusCode(StatusCodes.Status409Conflict, UserErrorCode.UserIdInUse.ToString());
+                    return Conflict();
                 }
                 await repository.User.CreateUserAsync(user);
             }
             catch (Exception)
             {
-                return BadRequest(UserErrorCode.CouldNotCreateUser.ToString());
+                return BadRequest();
             }
             return Ok(user);
         }
@@ -77,7 +81,7 @@ namespace WebApi.Controllers
             {
                 if (user == null || !ModelState.IsValid)
                 {
-                    return BadRequest(UserErrorCode.UserPseudonymeAndEtatRequired.ToString());
+                    return BadRequest();
                 }
                 var existingItem = await repository.User.GetUserByIdAsync(user.Id);
                 if (existingItem == null)
@@ -88,7 +92,7 @@ namespace WebApi.Controllers
             }
             catch (Exception)
             {
-                return BadRequest(UserErrorCode.CouldNotUpdateUser.ToString());
+                return BadRequest();
             }
             return NoContent();
         }
@@ -101,13 +105,13 @@ namespace WebApi.Controllers
                 var user = await repository.User.GetUserByIdAsync(id);
                 if (user == null)
                 {
-                    return NotFound(UserErrorCode.RecordNotFound.ToString());
+                    return NotFound();
                 }
                 await repository.User.DeleteUserAsync(user);
             }
             catch (Exception)
             {
-                return BadRequest(UserErrorCode.CouldNotDeleteUser.ToString());
+                return BadRequest();
             }
             return NoContent();
         }
@@ -115,7 +119,7 @@ namespace WebApi.Controllers
 
     public enum UserErrorCode
     {
-        UserPseudonymeAndEtatRequired,
+        UserPseudoAndMoodRequired,
         UserIdInUse,
         RecordNotFound,
         CouldNotCreateUser,
