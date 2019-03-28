@@ -15,7 +15,9 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using WebApi.Filters;
 
@@ -105,7 +107,20 @@ namespace WebApi
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Delta Festival Swagger", Version = "v1" });
+                c.SwaggerDoc("v1",
+                    new Info
+                    {
+                        Title = "API test",
+                        Version = "v1"
+                    });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                if (File.Exists(xmlPath))
+                {
+                    c.IncludeXmlComments(xmlPath);
+                }
             });
 
 
@@ -155,6 +170,7 @@ namespace WebApi
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseAuthentication();
 
             app.UseCors(x => x

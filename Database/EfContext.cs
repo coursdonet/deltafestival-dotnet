@@ -17,7 +17,7 @@ namespace Database
          
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
             //modelBuilder.Entity<User>().HasKey(p=>p.Id);
             modelBuilder.ApplyConfiguration(new UserMap());
         }

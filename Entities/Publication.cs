@@ -1,5 +1,7 @@
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
@@ -12,11 +14,14 @@ namespace Entities
 
         public DateTime CreationDate { get; set; }
 
-        public string Content { get; set; } //attention : seulement pour les modérateurs 
+        [Required(ErrorMessage = "Content is required."), StringLength(500, ErrorMessage = "Content cannot exceed 500 characters. ")]
+        public string Content { get; set; }
 
+        [DefaultValue(false)]
         public bool IsCoupDeCoeur { get; set; }
 
         public User User { get; set; }
+        public SuperUser SuperUser { get; set; }
 
         [Required]
         public string File { get; set; }
@@ -27,3 +32,4 @@ namespace Entities
 
     }
 }
+

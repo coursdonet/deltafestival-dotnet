@@ -37,7 +37,7 @@ namespace BackOffice
             services.AddMvcCore(options =>
               {
               });
-            services.AddDbContext<EfContext>(options => options.UseSqlServer(
+            services.AddDbContext<gestionContext>(options => options.UseSqlServer(
                     Configuration.GetConnectionString("FestivalDb")
                     , x => x.MigrationsAssembly("Database")));
        
