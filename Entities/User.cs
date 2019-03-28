@@ -2,9 +2,6 @@ using DeltaFestival.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
@@ -27,7 +24,7 @@ namespace Entities
         [Required]
         public int MoodId { get; set; } //un utilisateur doit pouvoir choisir un état d'esprit qui permettra de regrouper les gens par affinité
 
-        public Mood ActualMood { get; set; }
+        public virtual Mood ActualMood { get; set; }
 
         public ICollection<Publication> Publications { get; set; }
 

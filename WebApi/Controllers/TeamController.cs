@@ -1,20 +1,21 @@
-using System;
-using System.Threading.Tasks;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 using WebApi.Interfaces;
 
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApi.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class TeamController : ControllerBase
     {
+
         private readonly IRepositoryWrapper repository;
 
-        public UserController(IRepositoryWrapper repository)
+        public TeamController(IRepositoryWrapper repository)
         {
             this.repository = repository;
         }
@@ -24,8 +25,8 @@ namespace WebApi.Controllers
         {
             try
             {
-                var users = await repository.User.GetAllUsersAsync();
-                return Ok(users);
+                var teams = await repository.Team.GetAllTeamsAsync();
+                return Ok(teams);
             }
             catch (Exception e)
             {
@@ -38,7 +39,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                var user = await repository.User.GetUserByIdAsync(id);
+                var user = await repository.Team.GetTeamByIdAsync(id);
                 if (user == null)
                 {
                     return NotFound();
@@ -52,43 +53,43 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] User user)
+        public async Task<IActionResult> Create([FromBody] Team team)
         {
             try
             {
-                if (user == null || !ModelState.IsValid)
+                if (team == null || !ModelState.IsValid)
                 {
                     return BadRequest();
                 }
 
-                if (await repository.User.GetUserByIdAsync(user.Id) != null)
+                if (await repository.Team.GetTeamByIdAsync(team.Id) != null)
                 {
                     return Conflict();
                 }
-                await repository.User.CreateUserAsync(user);
+                await repository.Team.CreateTeamAsync(team);
             }
             catch (Exception)
             {
                 return BadRequest();
             }
-            return Ok(user);
+            return Ok(team);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] User user)
+        public async Task<IActionResult> Edit([FromBody] Team team)
         {
             try
             {
-                if (user == null || !ModelState.IsValid)
+                if (team == null || !ModelState.IsValid)
                 {
                     return BadRequest();
                 }
-                var existingItem = await repository.User.GetUserByIdAsync(user.Id);
+                var existingItem = await repository.Team.GetTeamByIdAsync(team.Id);
                 if (existingItem == null)
                 {
-                    return NotFound(UserErrorCode.RecordNotFound.ToString());
+                    return NotFound();
                 }
-                await repository.User.UpdateUserAsync(user);
+                await repository.Team.UpdateTeamAsync(team);
             }
             catch (Exception)
             {
@@ -102,12 +103,12 @@ namespace WebApi.Controllers
         {
             try
             {
-                var user = await repository.User.GetUserByIdAsync(id);
-                if (user == null)
+                var team = await repository.Team.GetTeamByIdAsync(id);
+                if (team == null)
                 {
                     return NotFound();
                 }
-                await repository.User.DeleteUserAsync(user);
+                await repository.Team.DeleteTeamAsync(team);
             }
             catch (Exception)
             {
@@ -115,15 +116,5 @@ namespace WebApi.Controllers
             }
             return NoContent();
         }
-    }
-
-    public enum UserErrorCode
-    {
-        UserPseudoAndMoodRequired,
-        UserIdInUse,
-        RecordNotFound,
-        CouldNotCreateUser,
-        CouldNotUpdateUser,
-        CouldNotDeleteUser
     }
 }
