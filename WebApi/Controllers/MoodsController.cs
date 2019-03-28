@@ -12,46 +12,46 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class MoodsController : ControllerBase
     {
         private readonly BrownContext _context;
 
-        public UsersController(BrownContext context)
+        public MoodsController(BrownContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Moods
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<Mood>>> GetMood()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Mood.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Moods/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<Mood>> GetMood(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var mood = await _context.Mood.FindAsync(id);
 
-            if (user == null)
+            if (mood == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return mood;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Moods/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutMood(int id, Mood mood)
         {
-            if (id != user.Id)
+            if (id != mood.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(mood).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!MoodExists(id))
                 {
                     return NotFound();
                 }
@@ -72,35 +72,35 @@ namespace WebApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Moods
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Mood>> PostMood(Mood mood)
         {
-            _context.Users.Add(user);
+            _context.Mood.Add(mood);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return CreatedAtAction("GetMood", new { id = mood.Id }, mood);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Moods/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public async Task<ActionResult<Mood>> DeleteMood(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var mood = await _context.Mood.FindAsync(id);
+            if (mood == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
+            _context.Mood.Remove(mood);
             await _context.SaveChangesAsync();
 
-            return user;
+            return mood;
         }
 
-        private bool UserExists(int id)
+        private bool MoodExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.Mood.Any(e => e.Id == id);
         }
     }
 }

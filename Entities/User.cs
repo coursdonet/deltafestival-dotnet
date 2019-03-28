@@ -9,10 +9,13 @@ namespace Entities
     {
         public int Id { get; set; }
 
-        //  public string Email { get; set; }
+        public string Email { get; set; }
 
-        //  public string Password { get; set; }
+        public string Password { get; set; }
 
+        public string Token { get; set; }
+
+        //  public string Pseudo { get; set; }
         [Required]
         public string Pseudo { get; set; } //un utilisateur doit pouvoir choisir un pseudonyme pour le caractériser
 
@@ -41,8 +44,8 @@ namespace Entities
         public List<Crush> Crushes { get; set; }
 
         public List<Ignored> IgnoredPeople { get; set; }
-
-        public string Token { get; set; }
+        
+        public User() { }
 
     }
 }

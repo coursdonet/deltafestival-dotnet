@@ -2,7 +2,6 @@ using AutoMapper;
 using Database;
 using DeltaFestival.IRepository;
 using DeltaFestival.Repository;
-using DeltaFestivalAPI.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,6 +19,8 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using WebApi.Filters;
+using WebApi.Helpers;
+using WebApi.Services;
 
 namespace WebApi
 {
@@ -93,11 +94,35 @@ namespace WebApi
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            #region DB & context 
             services.AddDbContext<EfContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("FestivalDb")
                 , x => x.MigrationsAssembly("Database")));
-
-            #region DB & context 
 
             //services.AddDbContext<CpContext>(options => options.UseSqlServer(
             //    Configuration.GetConnectionString("CheckpointDb")
@@ -151,32 +176,8 @@ namespace WebApi
             services.Add(new ServiceDescriptor(typeof(IUserRepository), typeof(UserRepository), ServiceLifetime.Transient));
             //services.Add(new ServiceDescriptor(typeof()))
 
-            // configure strongly typed settings objects
-            var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
-
-            // configure jwt authentication
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes("TESTTOKEN");
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
-
-
+            // configure DI for application services
+            services.AddScoped<IUserService, UserService>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

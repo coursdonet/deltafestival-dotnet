@@ -12,46 +12,46 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class TeamsController : ControllerBase
     {
         private readonly BrownContext _context;
 
-        public UsersController(BrownContext context)
+        public TeamsController(BrownContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Teams
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<Team>>> GetTeam()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Team.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Teams/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<Team>> GetTeam(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var team = await _context.Team.FindAsync(id);
 
-            if (user == null)
+            if (team == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return team;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Teams/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutTeam(int id, Team team)
         {
-            if (id != user.Id)
+            if (id != team.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(team).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!TeamExists(id))
                 {
                     return NotFound();
                 }
@@ -72,35 +72,35 @@ namespace WebApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Teams
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Team>> PostTeam(Team team)
         {
-            _context.Users.Add(user);
+            _context.Team.Add(team);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return CreatedAtAction("GetTeam", new { id = team.Id }, team);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Teams/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public async Task<ActionResult<Team>> DeleteTeam(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var team = await _context.Team.FindAsync(id);
+            if (team == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
+            _context.Team.Remove(team);
             await _context.SaveChangesAsync();
 
-            return user;
+            return team;
         }
 
-        private bool UserExists(int id)
+        private bool TeamExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.Team.Any(e => e.Id == id);
         }
     }
 }
