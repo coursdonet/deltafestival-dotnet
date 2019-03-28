@@ -9,7 +9,9 @@ namespace Entities
     public class Zone
     {
         public int Id { get; set; }
+        public string Name { get; set; }
 
-          //todo add geometry / polygone
+        //public polygon
+        //todo add geometry / polygone
     }
 }
