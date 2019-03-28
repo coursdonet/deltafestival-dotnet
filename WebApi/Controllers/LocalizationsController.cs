@@ -14,9 +14,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class LocalizationsController : ControllerBase
     {
-        private readonly EfContext _context;
+        private readonly BrownContext _context;
 
-        public LocalizationsController(EfContext context)
+        public LocalizationsController(BrownContext context)
         {
             _context = context;
         }

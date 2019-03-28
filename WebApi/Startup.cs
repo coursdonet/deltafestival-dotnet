@@ -4,6 +4,7 @@ using System.Reflection;
 using AutoMapper;
 using Database;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApi.Filters;
+using Microsoft.IdentityModel.Tokens;
+using WebApi.Helpers;
+using WebApi.Services;
+using System.Text;
 
 namespace WebApi
 {
@@ -79,6 +84,31 @@ namespace WebApi
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
             #region DB & context 
             services.AddDbContext<EfContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("FestivalDb")
@@ -100,10 +130,11 @@ namespace WebApi
             // Register the Swagger generator, defining 1 or more Swagger documents      
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Briow API", Version = "v1" });
             });
 
-
+            // configure DI for application services
+            services.AddScoped<IUserService, UserService>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
