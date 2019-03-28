@@ -1,9 +1,0 @@
-C:\Users\edwar\Source\Repos\deltafestival-dotnet\Entities\bin\Debug\netcoreapp2.2\Entities.deps.json
-C:\Users\edwar\Source\Repos\deltafestival-dotnet\Entities\bin\Debug\netcoreapp2.2\Entities.dll
-C:\Users\edwar\Source\Repos\deltafestival-dotnet\Entities\bin\Debug\netcoreapp2.2\Entities.pdb
-C:\Users\edwar\Source\Repos\deltafestival-dotnet\Entities\obj\Debug\netcoreapp2.2\Entities.csprojAssemblyReference.cache
-C:\Users\edwar\Source\Repos\deltafestival-dotnet\Entities\obj\Debug\netcoreapp2.2\Entities.csproj.CoreCompileInputs.cache
-C:\Users\edwar\Source\Repos\deltafestival-dotnet\Entities\obj\Debug\netcoreapp2.2\Entities.AssemblyInfoInputs.cache
-C:\Users\edwar\Source\Repos\deltafestival-dotnet\Entities\obj\Debug\netcoreapp2.2\Entities.AssemblyInfo.cs
-C:\Users\edwar\Source\Repos\deltafestival-dotnet\Entities\obj\Debug\netcoreapp2.2\Entities.dll
-C:\Users\edwar\Source\Repos\deltafestival-dotnet\Entities\obj\Debug\netcoreapp2.2\Entities.pdb
