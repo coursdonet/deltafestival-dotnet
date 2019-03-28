@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +13,8 @@ namespace Entities
 
         //todo 
         //log
-        public double Longitude { get; set; }
         //lat
-        public double Latitude { get; set; }
         //date
-        public DateTime EmitTime { get; set; }
-
         public int UserId { get; set; }
         public virtual User User { get; set; }
 
@@ -26,9 +22,9 @@ namespace Entities
 
         public int ZoneId { get; set; }
 
-        public virtual Zone Zone { get; set; }
+        public virtual Zone Zone {get;set;}
 
-
+    
 
 
     }

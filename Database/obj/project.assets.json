@@ -3483,23 +3483,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lucas\\.nuget\\packages\\": {},
+    "C:\\Users\\jonat\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucas\\source\\Workspaces\\Workspace\\DeltaFestival_Proto\\main\\DeltaFestival\\Database\\Database.csproj",
+      "projectUniqueName": "C:\\Users\\jonat\\Source\\Workspaces\\DeltaFestival_Proto\\TeamHoldaway\\DeltaFestival\\Database\\Database.csproj",
       "projectName": "Database",
-      "projectPath": "C:\\Users\\lucas\\source\\Workspaces\\Workspace\\DeltaFestival_Proto\\main\\DeltaFestival\\Database\\Database.csproj",
-      "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lucas\\source\\Workspaces\\Workspace\\DeltaFestival_Proto\\main\\DeltaFestival\\Database\\obj\\",
+      "projectPath": "C:\\Users\\jonat\\Source\\Workspaces\\DeltaFestival_Proto\\TeamHoldaway\\DeltaFestival\\Database\\Database.csproj",
+      "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jonat\\Source\\Workspaces\\DeltaFestival_Proto\\TeamHoldaway\\DeltaFestival\\Database\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jonat\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3512,8 +3512,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\lucas\\source\\Workspaces\\Workspace\\DeltaFestival_Proto\\main\\DeltaFestival\\Entities\\Entities.csproj": {
-              "projectPath": "C:\\Users\\lucas\\source\\Workspaces\\Workspace\\DeltaFestival_Proto\\main\\DeltaFestival\\Entities\\Entities.csproj"
+            "C:\\Users\\jonat\\Source\\Workspaces\\DeltaFestival_Proto\\TeamHoldaway\\DeltaFestival\\Entities\\Entities.csproj": {
+              "projectPath": "C:\\Users\\jonat\\Source\\Workspaces\\DeltaFestival_Proto\\TeamHoldaway\\DeltaFestival\\Entities\\Entities.csproj"
             }
           }
         }

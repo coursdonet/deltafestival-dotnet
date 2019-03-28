@@ -10,20 +10,20 @@ namespace Entities
     {
         public int Id { get; set; }
 
-        public float Longitude { get; set; }
+        //log
 
-        public float Latitude { get; set; }
+        //lat
 
         public string Name { get; set; }
 
+        public string XAxis { get; set; }
+
+        public string YAxis { get; set; }
+
         public bool IsActive { get; set; }
 
-        public bool IsObsolete { get; set; }
 
-        public Checkpoint ()
-        {
-            IsActive = true;
-        }
+        public bool IsObsolete { get; set; }
     }
 
 
