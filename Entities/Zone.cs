@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +9,9 @@ namespace Entities
     public class Zone
     {
         public int Id { get; set; }
+        public string Name { get; set; }
 
-          //todo add geometry / polygone
+        //public polygon
+        //todo add geometry / polygone
     }
 }

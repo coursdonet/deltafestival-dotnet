@@ -1,0 +1,14 @@
+namespace Entities
+{
+    public class Mood
+    {
+        public int Id { get; set; }
+<<<<<<< HEAD
+        public string MoodValue { get; set; }
+=======
+
+        public string Label { get; set; }
+
+>>>>>>> master
+    }
+}

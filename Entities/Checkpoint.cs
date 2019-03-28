@@ -16,7 +16,7 @@ namespace Entities
 
         public string Name { get; set; }
 
-        public DateTime LastDisabled { get; set; }
+        public bool IsActive { get; set; }
 
         public bool IsObsolete { get; set; }
 
