@@ -15,6 +15,7 @@ namespace Database
         }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
+        public virtual DbSet<TeamMembers> TeamMembers { get; set; }
         public virtual DbSet<Checkpoint> Checkpoints { get; set; }
         public virtual DbSet<TeamCheckpoints> TeamCheckpoints { get; set; }
         public virtual DbSet<UserValidatedCheckpoints> UserValidatedCheckpoints { get; set; }

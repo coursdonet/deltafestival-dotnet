@@ -20,6 +20,8 @@ namespace Entities
 
         public bool IsObsolete { get; set; }
 
+        public bool IsActive { get; set; }
+
         public int AreaOfAction { get; set; }
 
         public Checkpoint ()

@@ -23,6 +23,11 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Checkpoint>>> GetCheckpointsItems()
         {
+            foreach (Checkpoint checkpoint in _context.Checkpoints.Where(r => !r.IsObsolete).ToList())
+            {
+                checkpoint.IsActive = checkpoint.LastDisabled < DateTime.Now.AddHours(-1);
+            }
+            await _context.SaveChangesAsync();
             return await _context.Checkpoints.Where(r => !r.IsObsolete).ToListAsync();
         }
 

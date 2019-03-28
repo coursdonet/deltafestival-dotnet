@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,6 +33,20 @@ namespace WebApi.Controllers
         public async Task<ActionResult<TeamMembers>> GetTeamMembers(int id)
         {
             var teamMembers = await _context.TeamMembers.FindAsync(id);
+
+            if (teamMembers == null)
+            {
+                return NotFound();
+            }
+
+            return teamMembers;
+        }
+
+        // GET: api/TeamMembers/5
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<TeamMembers>> GetUserTeam(int userId)
+        {
+            var teamMembers = await _context.TeamMembers.Where(p => p.UserId == userId && p.IsActive).SingleOrDefaultAsync();
 
             if (teamMembers == null)
             {
