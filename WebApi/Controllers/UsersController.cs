@@ -14,21 +14,21 @@ namespace WebApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly EfContext _context;
+        private readonly CpContext _context;
 
-        public UsersController(EfContext context)
+        public UsersController(CpContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/Users/5
+
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -42,7 +42,7 @@ namespace WebApi.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -72,7 +72,7 @@ namespace WebApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {

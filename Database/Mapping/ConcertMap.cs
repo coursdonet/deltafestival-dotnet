@@ -11,6 +11,7 @@ namespace Database.Mapping
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Artist).IsRequired();
             builder.Property(p => p.Hour).IsRequired();
+            builder.Property(p => p.Duration).IsRequired();
             builder.Property(p => p.ConcertLocationId).IsRequired();
         }
     }

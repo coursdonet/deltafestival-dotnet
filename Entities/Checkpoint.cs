@@ -16,13 +16,15 @@ namespace Entities
 
         public string Name { get; set; }
 
-        public bool IsActive { get; set; }
+        public DateTime LastDisabled { get; set; }
 
         public bool IsObsolete { get; set; }
 
+        public int AreaOfAction { get; set; }
+
         public Checkpoint ()
         {
-            IsActive = true;
+            AreaOfAction = 10;
         }
     }
 

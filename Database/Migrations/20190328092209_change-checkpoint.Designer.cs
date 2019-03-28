@@ -4,14 +4,16 @@ using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Database.Migrations
 {
     [DbContext(typeof(CpContext))]
-    partial class CpContextModelSnapshot : ModelSnapshot
+    [Migration("20190328092209_change-checkpoint")]
+    partial class changecheckpoint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,8 +59,6 @@ namespace Database.Migrations
                         .IsRequired();
 
                     b.Property<int>("ConcertLocationId");
-
-                    b.Property<int>("Duration");
 
                     b.Property<DateTime>("Hour");
 

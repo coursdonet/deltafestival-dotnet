@@ -22,11 +22,11 @@ namespace WebApi.Controllers
             return await _context.UserConcerts.ToListAsync();
         }
 
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserConcert>> GetUserConcertItem(int id)
+        //Return all subscribed concerts from an user id
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<IEnumerable<UserConcert>>> GetUserConcertsItems(int userId)
         {
-            var find = await _context.UserConcerts.FindAsync(id);
+            var find = await _context.UserConcerts.Where(r => r.UserId == userId).ToListAsync();
 
             if (find == null)
             {
@@ -38,34 +38,24 @@ namespace WebApi.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<UserConcert>> PostUserConcertItem(UserConcert item)
+        public async Task<ActionResult<IEnumerable<UserConcert>>> PostUserConcertItem(UserConcert item)
         {
-            _context.UserConcerts.Add(item);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetUserConcertsItems), new { id = item.Id }, item);
-        }
-
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserConcertItem(int id, UserConcert item)
-        {
-            if (id != item.Id)
+            Concert concert = _context.Concert.Find(item.ConcertId);
+            if ( _context.UserConcerts.Where(r => r.UserId == item.UserId && concert.Hour >= r.Concert.Hour && concert.Hour < r.Concert.Hour.AddMinutes(r.Concert.Duration)).Count() > 0)
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
-            _context.Entry(item).State = EntityState.Modified;
+            _context.UserConcerts.Add(item);
             await _context.SaveChangesAsync();
-
-            return NoContent();
+            return CreatedAtAction(nameof(GetUserConcertsItems), item);
         }
 
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserConcertItem(int id)
+        [HttpDelete("{concertId}")]
+        public async Task<IActionResult> DeleteUserConcertItem(int concertId, int userId)
         {
-            var item = await _context.UserConcerts.FindAsync(id);
+            var item = await _context.UserConcerts.FindAsync(concertId, userId);
 
             if (item == null)
             {

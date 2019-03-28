@@ -53,9 +53,10 @@ namespace WebApi.Controllers
         {
             if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
 
-            // Si le checkpoint est déjà validé on renvoie une erreur
+            // Si le checkpoint est déjà validé où est désactivé on renvoie une erreur
             if (_context.TeamCheckpoints.Where(p => p.TeamId == item.TeamId && p.CheckpointId == item.CheckpointId && p.TimeChecked > DateTime.Now.AddHours(-1)).Count() > 0
-                || _context.UserValidatedCheckpoints.Where(p => p.UserId == item.UserId && p.CheckpointId == item.CheckpointId && p.TimeChecked > DateTime.Now.AddSeconds(-5)).Count() > 0)
+                || _context.UserValidatedCheckpoints.Where(p => p.UserId == item.UserId && p.CheckpointId == item.CheckpointId && p.TimeChecked > DateTime.Now.AddSeconds(-5)).Count() > 0
+                || (item.Checkpoint.LastDisabled == null || item.Checkpoint.LastDisabled > DateTime.Now.AddHours(-1)))
             {
                 return Unauthorized();
             }
@@ -79,8 +80,19 @@ namespace WebApi.Controllers
                 teamCheckpoints.TimeChecked = DateTime.Now;
 
                 _context.TeamCheckpoints.Add(teamCheckpoints);
+                await _context.SaveChangesAsync();
+
+                if (_context.TeamCheckpoints.Where(p => p.TeamId == item.TeamId && p.TimeChecked > DateTime.Now.AddHours(-1)).Count() == 12)
+                {
+                    DateTime dateTime = DateTime.Now;
+                    item.Team.WinDate = dateTime;
+                    foreach (Checkpoint checkpoint in _context.Checkpoints.ToList())
+                    {
+                        checkpoint.LastDisabled = dateTime;
+                    }
+                    await _context.SaveChangesAsync();
+                }
             }
-            await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetUserValidatedCheckpointsItems), new { id = item.Id }, item);
         }

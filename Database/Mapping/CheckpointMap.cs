@@ -13,6 +13,7 @@ namespace Database.Mapping
             builder.Property(p => p.Latitude).IsRequired();
             builder.Property(p => p.Name).IsRequired();
             builder.Property(p => p.IsObsolete).HasDefaultValue(false);
+            builder.Property(p => p.AreaOfAction).HasDefaultValue(10);
         }
     }
 }

@@ -4,14 +4,16 @@ using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Database.Migrations
 {
     [DbContext(typeof(CpContext))]
-    partial class CpContextModelSnapshot : ModelSnapshot
+    [Migration("20190322111739_checkpoint-constraint-areaofaction")]
+    partial class checkpointconstraintareaofaction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,11 +31,11 @@ namespace Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(10);
 
+                    b.Property<bool>("IsActive");
+
                     b.Property<bool>("IsObsolete")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(false);
-
-                    b.Property<DateTime>("LastDisabled");
 
                     b.Property<float>("Latitude");
 
@@ -57,8 +59,6 @@ namespace Database.Migrations
                         .IsRequired();
 
                     b.Property<int>("ConcertLocationId");
-
-                    b.Property<int>("Duration");
 
                     b.Property<DateTime>("Hour");
 
@@ -88,8 +88,6 @@ namespace Database.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("MoodValue");
 
                     b.HasKey("Id");
 
