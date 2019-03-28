@@ -11,6 +11,11 @@ namespace Entities
     {
         public int Id { get; set; }
 
+        public string Name { get; set; }
+
+        public float lat { get; set; }
+        public float longi { get; set; }
+
         //todo add posi
 
     }
