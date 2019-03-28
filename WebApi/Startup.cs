@@ -1,15 +1,23 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using AutoMapper;
 using Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
@@ -54,16 +62,24 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors()
 
-            //cors
-            services.AddCors();
-           
-            services.AddMvcCore(options =>
+            //#region DI
+            //    // Add useful interface for accessing the ActionContext outside a controller.
+            //    .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
+            //    // Add useful interface for accessing the HttpContext outside a controller.
+            //    .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
+            //    // Add useful interface for accessing the IUrlHelper outside a controller.
+            //    .AddScoped<IUrlHelper>(x => x
+            //        .GetRequiredService<IUrlHelperFactory>()
+            //        .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
+            //#endregion
+
+                    .AddMvcCore(options =>
                 {
                     options.Filters.Add(new CacheControlFilter());  // Add "Cache-Control" header. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cache-control
-                    options.Filters.Add(new ApiExceptionFilterAttribute());
                 })
-               .AddApiExplorer()
+                .AddApiExplorer()
                 .AddJsonFormatters()    // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#content-formatting
                 .AddJsonOptions(options =>
                 {
@@ -78,29 +94,31 @@ namespace WebApi
 #endif
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            #region DB & context 
-            services.AddDbContext<EfContext>(options => options.UseSqlServer(
-                Configuration.GetConnectionString("FestivalDb")
-                , x => x.MigrationsAssembly("Database")));
-
-            services.AddDbContext<CpContext>(options => options.UseSqlServer(
-                Configuration.GetConnectionString("CheckpointDb")
-                , x => x.MigrationsAssembly("Database")));
-
-            services.AddDbContext<BrownContext>(options => options.UseSqlServer(
-                Configuration.GetConnectionString("BrownDb")
-                , x => x.MigrationsAssembly("Database")));
-            #endregion
+            //TODO
+            //sql connection
+            //TO REMOVE
+            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=EFDeltaFestival.AspNetCore2;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<EfContext>(options => options.UseSqlServer(connectionString));
+              //  , x => x.MigrationsAssembly("Database")));
 
             //AutoMapper
             services.AddAutoMapper();   // Check out Configuration/AutoMapperProfiles/DefaultProfile to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#automapper
 
 
-            // Register the Swagger generator, defining 1 or more Swagger documents      
+            // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1",
+                    new Info { Title = "API test",
+                        Version = "v1" });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                if (File.Exists(xmlPath))
+                {
+                    c.IncludeXmlComments(xmlPath);
+                }
             });
 
 
@@ -110,52 +128,15 @@ namespace WebApi
         {
             if (env.IsDevelopment())
             {
-               app.UseDeveloperExceptionPage();
-
-
+                app.UseDeveloperExceptionPage();
             }
             else
             {
                 app.UseHsts();
             }
-            
-           
-            // app.UseStatusCodePagesWithReExecute("Error/{0}");
-            // app.UseExceptionHandler("/Error/500");
-            app.UseStaticFiles();
-
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("../swagger/v1/swagger.json", "API V1");
-            });
 
             app.UseHttpsRedirection();
             app.UseMvc();
-
-            //custom routes if need
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=test}/{action=get}/{id?}");
-            });
-            //Conventional routing
-            app.UseMvcWithDefaultRoute();
-
-            //Catch-all route
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "catch-all",
-                    template: "{*url}",
-                    defaults: new { controller = "Error", action = "Message" });
-                ;
-            });
-
         }
     }
 }

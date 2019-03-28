@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,24 +6,20 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class Checkpoint
+    class Checkpoint
     {
         public int Id { get; set; }
 
-        public float Longitude { get; set; }
+        //log
 
-        public float Latitude { get; set; }
+        //lat
 
         public string Name { get; set; }
 
         public bool IsActive { get; set; }
 
-        public bool IsObsolete { get; set; }
 
-        public Checkpoint ()
-        {
-            IsActive = true;
-        }
+        public bool IsObsolete { get; set; }
     }
 
 

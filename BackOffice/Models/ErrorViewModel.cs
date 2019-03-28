@@ -8,6 +8,4 @@ namespace BackOffice.Models
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
-
-  
 }
