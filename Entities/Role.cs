@@ -1,19 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities
+namespace DeltaFestival.Models
 {
-
-    public class PlaceCategory
+    public class Role
     {
         public int Id { get; set; }
 
-        //todo add posi
-
+        public string Label { get; set; }
     }
-
-
 }
