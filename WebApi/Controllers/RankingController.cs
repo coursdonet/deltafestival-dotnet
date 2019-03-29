@@ -30,9 +30,9 @@ namespace WebApi.Controllers
                 }
                 return Ok(await repository.Ranking.GetRankingBetweenTeamAsync(id, count));
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
 
@@ -43,9 +43,9 @@ namespace WebApi.Controllers
             {
                 return Ok(await repository.Ranking.GetRankingAsync());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
     }

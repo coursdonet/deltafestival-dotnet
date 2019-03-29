@@ -30,7 +30,7 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, e.Message);
             }
         }
 
@@ -48,7 +48,7 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, "Internal server error ");
+                return StatusCode(500, e.Message);
             }
         }
 
@@ -68,9 +68,9 @@ namespace WebApi.Controllers
                 }
                 await repository.Team.CreateTeamAsync(team);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
             return Ok(team);
         }
@@ -91,9 +91,9 @@ namespace WebApi.Controllers
                 }
                 await repository.Team.UpdateTeamAsync(team);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
             return NoContent();
         }
@@ -110,9 +110,9 @@ namespace WebApi.Controllers
                 }
                 await repository.Team.DeleteTeamAsync(team);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
             return NoContent();
         }

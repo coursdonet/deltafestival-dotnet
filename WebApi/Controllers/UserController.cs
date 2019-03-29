@@ -29,7 +29,7 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, e.Message);
             }
         }
 
@@ -47,7 +47,7 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, "Internal server error ");
+                return StatusCode(500, e.Message);
             }
         }
 
@@ -67,9 +67,9 @@ namespace WebApi.Controllers
                 }
                 await repository.User.CreateUserAsync(user);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
             return Ok(user);
         }
@@ -86,13 +86,13 @@ namespace WebApi.Controllers
                 var existingItem = await repository.User.GetUserByIdAsync(user.Id);
                 if (existingItem == null)
                 {
-                    return NotFound(UserErrorCode.RecordNotFound.ToString());
+                    return NotFound();
                 }
                 await repository.User.UpdateUserAsync(user);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
             return NoContent();
         }
@@ -109,21 +109,11 @@ namespace WebApi.Controllers
                 }
                 await repository.User.DeleteUserAsync(user);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
             return NoContent();
         }
-    }
-
-    public enum UserErrorCode
-    {
-        UserPseudoAndMoodRequired,
-        UserIdInUse,
-        RecordNotFound,
-        CouldNotCreateUser,
-        CouldNotUpdateUser,
-        CouldNotDeleteUser
     }
 }
