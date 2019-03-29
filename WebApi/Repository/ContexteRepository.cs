@@ -1,36 +1,50 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Database;
+using Entities;
+using WebApi.Interfaces;
 
 namespace WebApi.Repository
 {
-    public class StreakRepository : RepositoryBase<Streak>, IStreakRepository
+    public class ContexteRepository : RepositoryBase<Contexte>, IContexteRepository
     {
-        public StreakRepository(EfContext _EfContext) : base(_EfContext)
-        {
-        }
 
-        public async Task<Streak> GetStreak()
+
+        public ContexteRepository(EfContext _EfContext) : base(_EfContext)
         {
-            var streak = await FindAllAsync();
-            return streak.DefaultIfEmpty(new Streak()).FirstOrDefault();
         }
 
         public async Task CheckAndUpdateStreak(int teamId)
         {
-            var actualStreak = await GetStreak();
-            if (actualStreak.TeamID == teamId)
-            {
-                actualStreak.Lenght += 1;
-                Update(actualStreak);
-                await SaveAsync();
-            }
-            else
-            {
-                actualStreak.Lenght = 1;
-                actualStreak.TeamID = actualStreak.TeamID;
-            }
 
+            //Definir les noms des clés en BBD.
+            Contexte teamIdStreak, lenghtStreak = new Contexte();
+            var contexte = await GetContexte();
+            if (contexte.TryGetValue("", out teamIdStreak) && contexte.TryGetValue("", out lenghtStreak))
+            {
+                if (int.Parse(teamIdStreak.value) == teamId)
+                {
+                    int lenght = int.Parse(lenghtStreak.value) + 1;
+                    lenghtStreak.value = lenght.ToString();
+                    Update(lenghtStreak);
+                    await SaveAsync();
+                } else {
+                    
+                    int lenght = int.Parse(lenghtStreak.value) + 1;
+                    lenghtStreak.value = "0";
+                    teamIdStreak.value = teamId.ToString();
+                    Update(teamIdStreak);
+                    Update(lenghtStreak);
+                    await SaveAsync();
+                }
+            }
+        }
+
+        public async Task<IDictionary<string, Contexte>> GetContexte()
+        {
+            var contextes = await FindAllAsync();
+            return contextes.ToDictionary(x => x.key);
         }
     }
 }
