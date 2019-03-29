@@ -14,10 +14,24 @@ namespace WebApi.Repository
         private IUserRepository _user;
         private ITeamRepository _team;
         private IRankingRepository _ranking;
+        private IUserValidatedCheckpointsRepository _userValidatedCheckpoints;
 
         public RepositoryWrapper(EfContext context)
         {
             _efContext = context;
+        }
+
+        public IUserValidatedCheckpointsRepository UserValidatedCheckpoints
+        {
+            get
+            {
+                if (_userValidatedCheckpoints == null)
+                {
+                    _userValidatedCheckpoints = new UserValidatedCheckpointsRepository(_efContext);
+                }
+
+                return UserValidatedCheckpoints;
+            }
         }
 
         public IUserRepository User

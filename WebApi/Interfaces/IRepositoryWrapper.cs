@@ -10,6 +10,6 @@ namespace WebApi.Interfaces
         IUserRepository User { get; }
         ITeamRepository Team { get; }
         IRankingRepository Ranking { get; }
-
+        IUserValidatedCheckpointsRepository UserValidatedCheckpoints { get; }
     }
 }
