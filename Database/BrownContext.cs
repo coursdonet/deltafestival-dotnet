@@ -1,8 +1,6 @@
 using Database.Mapping;
 using Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System;
 
 namespace Database
 {
