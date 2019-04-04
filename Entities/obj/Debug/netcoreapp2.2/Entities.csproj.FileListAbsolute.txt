@@ -6,3 +6,4 @@ C:\Users\Remy\Desktop\Ynov\Mobile .Net\Project\deltafestival-dotnet\Entities\obj
 C:\Users\Remy\Desktop\Ynov\Mobile .Net\Project\deltafestival-dotnet\Entities\obj\Debug\netcoreapp2.2\Entities.AssemblyInfo.cs
 C:\Users\Remy\Desktop\Ynov\Mobile .Net\Project\deltafestival-dotnet\Entities\obj\Debug\netcoreapp2.2\Entities.dll
 C:\Users\Remy\Desktop\Ynov\Mobile .Net\Project\deltafestival-dotnet\Entities\obj\Debug\netcoreapp2.2\Entities.pdb
+C:\Users\Remy\Desktop\Ynov\Mobile .Net\Project\deltafestival-dotnet\Entities\obj\Debug\netcoreapp2.2\Entities.csprojAssemblyReference.cache
