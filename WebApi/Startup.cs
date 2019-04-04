@@ -61,7 +61,6 @@ namespace WebApi
             services.AddCors();
 
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
-            services.AddScoped<IRankingRepository, RankingRepository>();
 
             services.AddMvcCore(options =>
                 {
