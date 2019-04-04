@@ -18,7 +18,7 @@ namespace WebApi.Controllers
             this.repository = repository;
         }
 
-        [HttpGet("{id}")]
+        [HttpPost("{id}")]
         public async Task<IActionResult> RankingBetweenTeam(int id, [FromBody] int count)
         {
             try
