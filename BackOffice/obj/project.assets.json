@@ -40,6 +40,18 @@
           "lib/netstandard1.3/DotNetEnv.dll": {}
         }
       },
+      "GeoJSON.Net/1.1.72": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "10.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.1/GeoJSON.Net.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/GeoJSON.Net.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -4764,6 +4776,7 @@
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "Entities": "1.0.0",
+          "GeoJSON.Net": "1.1.72",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.2"
         },
         "compile": {
@@ -4776,6 +4789,9 @@
       "Entities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "GeoJSON.Net": "1.1.72"
+        },
         "compile": {
           "bin/placeholder/Entities.dll": {}
         },
@@ -4826,6 +4842,24 @@
         "dotnetenv.1.2.0.nupkg.sha512",
         "dotnetenv.nuspec",
         "lib/netstandard1.3/DotNetEnv.dll"
+      ]
+    },
+    "GeoJSON.Net/1.1.72": {
+      "sha512": "/gl8cZmlK2Wxj7LT/8Wam9c/mkFv9X1lS1ElJuEKpS23+0g1M7HDkwjanNQrvsqfdgUQp/CXiRyUo5wP7Nq6kg==",
+      "type": "package",
+      "path": "geojson.net/1.1.72",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "geojson.net.1.1.72.nupkg.sha512",
+        "geojson.net.nuspec",
+        "lib/net35/GeoJSON.Net.dll",
+        "lib/net40/GeoJSON.Net.dll",
+        "lib/net45/GeoJSON.Net.dll",
+        "lib/netstandard1.0/GeoJSON.Net.dll",
+        "lib/netstandard1.1/GeoJSON.Net.dll"
       ]
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -13051,6 +13085,7 @@
       "Database >= 1.0.0",
       "DotNetEnv >= 1.2.0",
       "Entities >= 1.0.0",
+      "GeoJSON.Net >= 1.1.72",
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
@@ -13112,6 +13147,10 @@
           "DotNetEnv": {
             "target": "Package",
             "version": "[1.2.0, )"
+          },
+          "GeoJSON.Net": {
+            "target": "Package",
+            "version": "[1.1.72, )"
           },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",

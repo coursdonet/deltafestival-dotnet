@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using GeoJSON.Net.Geometry;
+using Newtonsoft.Json;
 using Database;
 using Entities;
 
@@ -22,7 +24,12 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Zone>>> GetZones()
         {
+
+
             return await _context.Zones.ToListAsync();
+
+
+            
         }
 
         // GET: api/Zones/5
