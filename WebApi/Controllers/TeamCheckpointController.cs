@@ -26,7 +26,7 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TeamCheckpoints>>> GetTeamCheckpoint()
         {
-            if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
+            //if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
 
             return await _context.TeamCheckpoints.ToListAsync();
         }
@@ -35,7 +35,7 @@ namespace WebApi.Controllers
         [HttpGet("teamId/{TeamId}")]
         public async Task<ActionResult<IEnumerable<TeamCheckpoints>>> GetTeamCheckpoint(int TeamId)
         {
-            if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
+            //if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
 
             var Item = await _context.TeamCheckpoints.Where(p => p.TeamId == TeamId && p.TimeChecked > DateTime.Now.AddHours(-1)).ToListAsync();
 
@@ -51,7 +51,7 @@ namespace WebApi.Controllers
         [HttpGet("{Id}")]
         public async Task<ActionResult<TeamCheckpoints>> GetTeamCheckpointById(int Id)
         {
-            if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
+            //if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
 
             var Item = await _context.TeamCheckpoints.FindAsync(Id);
 

@@ -14,9 +14,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class TeamMembersController : ControllerBase
     {
-        private readonly EfContext _context;
+        private readonly CpContext _context;
 
-        public TeamMembersController(EfContext context)
+        public TeamMembersController(CpContext context)
         {
             _context = context;
         }
@@ -26,20 +26,6 @@ namespace WebApi.Controllers
         public async Task<ActionResult<IEnumerable<TeamMembers>>> GetTeamMembers()
         {
             return await _context.TeamMembers.ToListAsync();
-        }
-
-        // GET: api/TeamMembers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TeamMembers>> GetTeamMembers(int id)
-        {
-            var teamMembers = await _context.TeamMembers.FindAsync(id);
-
-            if (teamMembers == null)
-            {
-                return NotFound();
-            }
-
-            return teamMembers;
         }
 
         // GET: api/TeamMembers/5

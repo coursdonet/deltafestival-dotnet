@@ -26,7 +26,7 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserValidatedCheckpoints>>> GetUserValidatedCheckpointsItems()
         {
-            if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
+            //if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
 
             return await _context.UserValidatedCheckpoints.ToListAsync();
         }
@@ -35,7 +35,7 @@ namespace WebApi.Controllers
         [HttpGet("{UserId}")]
         public async Task<ActionResult<IEnumerable<UserValidatedCheckpoints>>> GetUserValidatedCheckpointsItem(int UserId)
         {
-            if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
+            //if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
 
             var todoItem = await _context.UserValidatedCheckpoints.Where(p => p.UserId == UserId).OrderBy(p => p.TimeChecked).ToListAsync();
 
@@ -51,12 +51,13 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<UserValidatedCheckpoints>> PostUserValidatedCheckpoint(UserValidatedCheckpoints item)
         {
-            if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
+            //if (_context.Users.Where(p => p.TicketCode == Request.Headers["Ticket"]).Count() == 0) return Unauthorized("WrongTicketNumber");
 
             // Si le checkpoint est déjà validé où est désactivé on renvoie une erreur
+            Checkpoint currCp = _context.Checkpoints.Find(item.CheckpointId);
             if (_context.TeamCheckpoints.Where(p => p.TeamId == item.TeamId && p.CheckpointId == item.CheckpointId && p.TimeChecked > DateTime.Now.AddHours(-1)).Count() > 0
                 || _context.UserValidatedCheckpoints.Where(p => p.UserId == item.UserId && p.CheckpointId == item.CheckpointId && p.TimeChecked > DateTime.Now.AddSeconds(-5)).Count() > 0
-                || (item.Checkpoint.LastDisabled == null || item.Checkpoint.LastDisabled > DateTime.Now.AddHours(-1)))
+                || (currCp.LastDisabled == null || currCp.LastDisabled > DateTime.Now.AddHours(-1)))
             {
                 return Unauthorized();
             }
