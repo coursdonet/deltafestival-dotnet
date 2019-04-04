@@ -8,5 +8,6 @@ namespace WebApi.Interfaces
     {
         Task<IDictionary<string, Contexte>> GetContexte();
         Task CheckAndUpdateStreak(int teamId);
+        Task<int> getSteak();
     }
 }

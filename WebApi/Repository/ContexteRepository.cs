@@ -41,6 +41,17 @@ namespace WebApi.Repository
             }
         }
 
+        public async Task<int> getSteak()
+        {
+            Contexte lenghtStreak = new Contexte();
+            var contexte = await GetContexte();
+            if (contexte.TryGetValue("", out lenghtStreak))
+            {
+                return int.Parse(lenghtStreak.value);
+            }
+            return -1;
+        }
+
         public async Task<IDictionary<string, Contexte>> GetContexte()
         {
             var contextes = await FindAllAsync();

@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Database;
 using WebApi.Interfaces;
-using WebApi.Repository;
 
 namespace WebApi.Repository
 {
@@ -14,6 +9,7 @@ namespace WebApi.Repository
         private IUserRepository _user;
         private ITeamRepository _team;
         private IRankingRepository _ranking;
+        private IContexteRepository _contexte;
         private IUserValidatedCheckpointsRepository _userValidatedCheckpoints;
 
         public RepositoryWrapper(EfContext context)
@@ -72,5 +68,19 @@ namespace WebApi.Repository
                 return _team;
             }
         }
+
+        public IContexteRepository Contexte
+        {
+            get
+            {
+                if (_contexte == null)
+                {
+                    _contexte = new ContexteRepository(_efContext);
+                }
+
+                return _contexte;
+            }
+        }
+
     }
 }

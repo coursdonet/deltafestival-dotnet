@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace WebApi.Interfaces
 {
     public interface IRepositoryWrapper
@@ -11,5 +6,6 @@ namespace WebApi.Interfaces
         ITeamRepository Team { get; }
         IRankingRepository Ranking { get; }
         IUserValidatedCheckpointsRepository UserValidatedCheckpoints { get; }
+        IContexteRepository Contexte { get; }
     }
 }
