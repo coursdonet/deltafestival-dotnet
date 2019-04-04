@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BackOffice.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Controller 
     {
         public IActionResult Index()
         {
