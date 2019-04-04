@@ -14,6 +14,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApi.Filters;
+using WebApi.Interfaces;
+using WebApi.Repository;
 
 namespace WebApi
 {
@@ -57,7 +59,10 @@ namespace WebApi
 
             //cors
             services.AddCors();
-           
+
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            services.AddScoped<IRankingRepository, RankingRepository>();
+
             services.AddMvcCore(options =>
                 {
                     options.Filters.Add(new CacheControlFilter());  // Add "Cache-Control" header. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#cache-control
