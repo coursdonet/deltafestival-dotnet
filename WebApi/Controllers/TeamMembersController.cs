@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +14,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class TeamMembersController : ControllerBase
     {
-        private readonly BrownContext _context;
+        private readonly CpContext _context;
 
-        public TeamMembersController(BrownContext context)
+        public TeamMembersController(CpContext context)
         {
             _context = context;
         }
@@ -29,10 +29,10 @@ namespace WebApi.Controllers
         }
 
         // GET: api/TeamMembers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TeamMembers>> GetTeamMembers(int id)
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<TeamMembers>> GetUserTeam(int userId)
         {
-            var teamMembers = await _context.TeamMembers.FindAsync(id);
+            var teamMembers = await _context.TeamMembers.Where(p => p.UserId == userId && p.IsActive).SingleOrDefaultAsync();
 
             if (teamMembers == null)
             {
