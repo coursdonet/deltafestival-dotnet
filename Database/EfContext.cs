@@ -27,6 +27,9 @@ namespace Database
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<UserValidatedCheckpoints> UserValidatedCheckpoints { get; set; }
         public virtual DbSet<Zone> Zone { get; set; }
+        public virtual DbSet<Contexte> Contexte { get; set; }
+        public virtual DbSet<Prevention> Prevention { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
