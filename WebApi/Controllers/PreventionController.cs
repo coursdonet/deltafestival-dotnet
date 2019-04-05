@@ -19,6 +19,11 @@ namespace WebApi.Controllers
         const string MSG_WATER = "Attention!!! Il faut boire de l'eau.";
         const string MSG_ALCOOL = "Attention!!! ne prend pas le volant.";
 
+        public PreventionController(IRepositoryWrapper repository)
+        {
+            this.repository = repository;
+        }
+
         [HttpPost("{id}")]
         public async Task<IActionResult> AddGlass(int userId, [FromBody] int type)
         {
@@ -45,9 +50,12 @@ namespace WebApi.Controllers
                         break;
                     case 1:
                         prevention.Alcoolcount += 1;
-                        if (prevention.lastAlcoolDate <= DateTime.Now.AddHours(-1))
+                        if (prevention.lastAlcoolDate <= DateTime.Now.AddHours(-1) && prevention.Alcoolcount > 2)
                         {
                             prevention.message = MSG_ALCOOL;
+                        } else
+                        {
+                            prevention.message = MSG_WATER;
                         }
                         prevention.lastAlcoolDate = DateTime.Now;
                         break;

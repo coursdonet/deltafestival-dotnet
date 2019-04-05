@@ -18,6 +18,11 @@ namespace WebApi.Controllers
 
         private readonly IRepositoryWrapper repository;
 
+        public LoginController(IRepositoryWrapper repository)
+        {
+            this.repository = repository;
+        }
+
         [HttpGet("{ticket}")]
         public async Task<IActionResult> Login(String ticket)
         {

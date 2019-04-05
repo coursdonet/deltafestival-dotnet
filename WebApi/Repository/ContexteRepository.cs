@@ -21,7 +21,7 @@ namespace WebApi.Repository
             //Definir les noms des clés en BBD.
             Contexte teamIdStreak, lenghtStreak = new Contexte();
             var contexte = await GetContexte();
-            if (contexte.TryGetValue("", out teamIdStreak) && contexte.TryGetValue("", out lenghtStreak))
+            if (contexte.TryGetValue("TeamIdStreak", out teamIdStreak) && contexte.TryGetValue("LenghtStreak", out lenghtStreak))
             {
                 if (int.Parse(teamIdStreak.value) == teamId)
                 {
@@ -45,7 +45,7 @@ namespace WebApi.Repository
         {
             Contexte lenghtStreak = new Contexte();
             var contexte = await GetContexte();
-            if (contexte.TryGetValue("", out lenghtStreak))
+            if (contexte.TryGetValue("LenghtStreak", out lenghtStreak))
             {
                 return int.Parse(lenghtStreak.value);
             }

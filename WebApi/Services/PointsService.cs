@@ -1,19 +1,26 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.Interfaces;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApi.Services
 {
-    public class PointsService
+    [Controller]
+    public class PointsService : ControllerBase
     {
-        const int CHECKPOINT_POINT = 0;
-        const int CHAT_POINT = 0;
-        const int HEARTH_STROKE_POINT = 0;
+        const int CHECKPOINT_POINT = 2;
+        const int CHAT_POINT = 1;
+        const int HEARTH_STROKE_POINT = 1;
         const int NUMBER_CHECKPOINT = 8;
         const int VALIDATE_ALL_CHECKPOINTS_POINTS = 3;
 
         private readonly IRepositoryWrapper repository;
+
+        public PointsService(IRepositoryWrapper repository)
+        {
+            this.repository = repository;
+        }
 
         public async Task AddPointsValidateCheckPoint(int id)
         {
@@ -41,8 +48,6 @@ namespace WebApi.Services
 
         public async Task AddPointsPostChat(int id)
         {
-
-            //TODO: Combo Management & Last CheckPoint Management
             await repository.Ranking.AddPointAsync(id, CHAT_POINT);
         }
 
