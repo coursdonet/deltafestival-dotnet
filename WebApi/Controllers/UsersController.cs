@@ -72,8 +72,20 @@ namespace WebApi.Controllers
             return NoContent();
         }
 
+        [HttpGet("login/{TicketCode}")]
+        public async Task<ActionResult<User>> Login(String TicketCode)
+        {
+            User user = await _context.Users.Where(p => p.TicketCode == TicketCode).FirstOrDefaultAsync();
 
-        [HttpPost]
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+        }
+
+        [HttpPost("register")]
         public async Task<ActionResult<User>> PostUser(User user)
         {
             _context.Users.Add(user);

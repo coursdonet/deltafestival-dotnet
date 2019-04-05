@@ -91,6 +91,9 @@ namespace WebApi.Controllers
                     {
                         checkpoint.LastDisabled = dateTime;
                     }
+
+                    Team team = await _context.Teams.FindAsync(item.TeamId);
+                    team.WinDate = DateTime.Now;
                     await _context.SaveChangesAsync();
                 }
             }

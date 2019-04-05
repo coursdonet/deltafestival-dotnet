@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +14,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class TeamsController : ControllerBase
     {
-        private readonly BrownContext _context;
+        private readonly CpContext _context;
 
-        public TeamsController(BrownContext context)
+        public TeamsController(CpContext context)
         {
             _context = context;
         }
@@ -25,14 +25,14 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Team>>> GetTeam()
         {
-            return await _context.Team.ToListAsync();
+            return await _context.Teams.ToListAsync();
         }
 
         // GET: api/Teams/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Team>> GetTeam(int id)
+        public async Task<ActionResult<Team>> GetTeamById(int id)
         {
-            var team = await _context.Team.FindAsync(id);
+            var team = await _context.Teams.FindAsync(id);
 
             if (team == null)
             {
@@ -76,7 +76,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Team>> PostTeam(Team team)
         {
-            _context.Team.Add(team);
+            _context.Teams.Add(team);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTeam", new { id = team.Id }, team);
@@ -86,13 +86,13 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Team>> DeleteTeam(int id)
         {
-            var team = await _context.Team.FindAsync(id);
+            var team = await _context.Teams.FindAsync(id);
             if (team == null)
             {
                 return NotFound();
             }
 
-            _context.Team.Remove(team);
+            _context.Teams.Remove(team);
             await _context.SaveChangesAsync();
 
             return team;
@@ -100,7 +100,7 @@ namespace WebApi.Controllers
 
         private bool TeamExists(int id)
         {
-            return _context.Team.Any(e => e.Id == id);
+            return _context.Teams.Any(e => e.Id == id);
         }
     }
 }
