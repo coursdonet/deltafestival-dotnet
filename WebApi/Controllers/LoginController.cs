@@ -6,32 +6,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Database;
 using Entities;
-
+using WebApi.Interfaces;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : Controller
+    public class LoginController : ControllerBase
     {
-        private readonly CpContext _context;
 
-        public LoginController(CpContext context) => _context = context;
+        private readonly IRepositoryWrapper repository;
 
-        // GET: login/ticketnumber
         [HttpGet("{ticket}")]
-        public async Task<ActionResult<User>> Login(String ticket)
+        public async Task<IActionResult> Login(String ticket)
         {
-            var todoItem = await _context.Users.Where(p => p.TicketCode == ticket).FirstOrDefaultAsync();
+            var user = await repository.User.GetUserByTicketAsync(ticket);
 
-            if (todoItem == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return todoItem;
+            return Ok(user);
         }
-
     }
 }
