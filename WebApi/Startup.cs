@@ -1,27 +1,26 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using AutoMapper;
 using Database;
+using DeltaFestival.IRepository;
+using DeltaFestival.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Text;
 using WebApi.Filters;
+using WebApi.Helpers;
+using WebApi.Services;
 
 namespace WebApi
 {
@@ -83,7 +82,7 @@ namespace WebApi
                 .AddJsonFormatters()    // See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#content-formatting
                 .AddJsonOptions(options =>
                 {
-                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                    //options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                     options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Include;
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -94,10 +93,54 @@ namespace WebApi
 #endif
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-           
+
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            #region DB & context 
             services.AddDbContext<EfContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("FestivalDb")
                 , x => x.MigrationsAssembly("Database")));
+
+            //services.AddDbContext<CpContext>(options => options.UseSqlServer(
+            //    Configuration.GetConnectionString("CheckpointDb")
+            //    , x => x.MigrationsAssembly("Database")));
+
+            //services.AddDbContext<CpContext>(options => options.UseSqlServer(
+            //    Configuration.GetConnectionString("CheckpointDb")
+            //    , x => x.MigrationsAssembly("Database")));
+
+            //services.AddDbContext<BrownContext>(options => options.UseSqlServer(
+            //    Configuration.GetConnectionString("BrownDb")
+            //    , x => x.MigrationsAssembly("Database")));
+
+            //services.AddDbContext<MapContext>(options => options.UseSqlServer(
+            //    Configuration.GetConnectionString("BlondeDb")
+            //    , x => x.MigrationsAssembly("Database")));
+
+            #endregion
 
             //AutoMapper
             services.AddAutoMapper();   // Check out Configuration/AutoMapperProfiles/DefaultProfile to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#automapper
@@ -105,7 +148,7 @@ namespace WebApi
 
             // Register the Swagger generator, defining 1 or more Swagger documents
 
-            
+
 
             services.AddSwaggerGen(c =>
             {
@@ -126,6 +169,15 @@ namespace WebApi
             });
 
 
+
+            services.Add(new ServiceDescriptor(typeof(IMoodRepository), typeof(MoodRepository), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IPublicationRepository), typeof(PublicationRepository), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRoleRepository), typeof(RoleRepository), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IUserRepository), typeof(UserRepository), ServiceLifetime.Transient));
+            //services.Add(new ServiceDescriptor(typeof()))
+
+            // configure DI for application services
+            //services.AddScoped<IUserService, UserService>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -140,6 +192,21 @@ namespace WebApi
             }
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
+
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("./v1/swagger.json", "Api v1");
+            });
+
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

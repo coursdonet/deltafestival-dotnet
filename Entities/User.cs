@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,19 +10,15 @@ namespace Entities
     {
         public int Id { get; set; }
 
-        //  public string Email { get; set; }
-
-        //  public string Password { get; set; }
-
-        //  public string Pseudo { get; set; }
+        public string UserName { get; set; }
 
         public int UserRoleId { get; set; }
         public virtual UserRole Role { get; set; }
 
         public int MoodId { get; set; }
-        public Mood ActualMood { get; set; }
+        public virtual Mood ActualMood { get; set; }
 
-        public ICollection<Publication> Publications { get; set; }
+        public virtual List<Publication> Publications { get; set; }
 
         public string TicketCode { get; set; }//index // unique
 
@@ -32,8 +28,13 @@ namespace Entities
 
         public bool IsActive { get; set; }
 
-
-
-
+        public User ()
+        {
+            MoodId = 1;
+            UserRoleId = 1;
+            Demission = 0;
+            CanPublish = true;
+            IsActive = true;
+        }
     }
 }

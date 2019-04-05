@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +11,8 @@ namespace Entities
         public int Id { get; set; }
 
         public int TeamId { get; set; }
-        public int UserId { get; set; }
 
+        public int UserId { get; set; }
 
         DateTime JoinDate { get; set; }
         

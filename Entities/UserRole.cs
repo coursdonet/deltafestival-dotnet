@@ -10,7 +10,6 @@ namespace Entities
 
         [Required(ErrorMessage = "Libelle is required.")]
         public string Libelle { get; set; }
-       
-        public ICollection<SuperUser> SuperUsers { get; set; }
+        //public vICollection<SuperUser> SuperUsers { get; set; }
     }
 }

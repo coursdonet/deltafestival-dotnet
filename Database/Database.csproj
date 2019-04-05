@@ -12,6 +12,110 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190322072421_m.cs" />
+    <Compile Remove="Migrations\20190322072421_m.Designer.cs" />
+    <Compile Remove="Migrations\20190322072731_m2.cs" />
+    <Compile Remove="Migrations\20190322072731_m2.Designer.cs" />
+    <Compile Remove="Migrations\20190322081146_m4.cs" />
+    <Compile Remove="Migrations\20190322081146_m4.Designer.cs" />
+    <Compile Remove="Migrations\20190322082350_m5.cs" />
+    <Compile Remove="Migrations\20190322082350_m5.Designer.cs" />
+    <Compile Remove="Migrations\20190322084225_Tem.cs" />
+    <Compile Remove="Migrations\20190322084225_Tem.Designer.cs" />
+    <Compile Remove="Migrations\20190322084832_Team.cs" />
+    <Compile Remove="Migrations\20190322084832_Team.Designer.cs" />
+    <Compile Remove="Migrations\20190322085005_balek.cs" />
+    <Compile Remove="Migrations\20190322085005_balek.Designer.cs" />
+    <Compile Remove="Migrations\20190322085115_b.cs" />
+    <Compile Remove="Migrations\20190322085115_b.Designer.cs" />
+    <Compile Remove="Migrations\20190322090208_f.cs" />
+    <Compile Remove="Migrations\20190322090208_f.Designer.cs" />
+    <Compile Remove="Migrations\20190322091216_a.cs" />
+    <Compile Remove="Migrations\20190322091216_a.Designer.cs" />
+    <Compile Remove="Migrations\20190322093234_Publication.cs" />
+    <Compile Remove="Migrations\20190322093234_Publication.Designer.cs" />
+    <Compile Remove="Migrations\20190322094016_z.cs" />
+    <Compile Remove="Migrations\20190322094016_z.Designer.cs" />
+    <Compile Remove="Migrations\20190322094124_11.cs" />
+    <Compile Remove="Migrations\20190322094124_11.Designer.cs" />
+    <Compile Remove="Migrations\20190322110012_3.cs" />
+    <Compile Remove="Migrations\20190322110012_3.Designer.cs" />
+    <Compile Remove="Migrations\20190322111739_checkpoint-constraint-areaofaction.cs" />
+    <Compile Remove="Migrations\20190322111739_checkpoint-constraint-areaofaction.Designer.cs" />
+    <Compile Remove="Migrations\20190322112704_adding-mood.cs" />
+    <Compile Remove="Migrations\20190322112704_adding-mood.Designer.cs" />
+    <Compile Remove="Migrations\20190322133026_checkpoint.cs" />
+    <Compile Remove="Migrations\20190322133026_checkpoint.Designer.cs" />
+    <Compile Remove="Migrations\20190322134448_Checkpoints update.cs" />
+    <Compile Remove="Migrations\20190322134448_Checkpoints update.Designer.cs" />
+    <Compile Remove="Migrations\20190322134830_Checkpoint fix.cs" />
+    <Compile Remove="Migrations\20190322134830_Checkpoint fix.Designer.cs" />
+    <Compile Remove="Migrations\20190322135459_6.cs" />
+    <Compile Remove="Migrations\20190322135459_6.Designer.cs" />
+    <Compile Remove="Migrations\20190322135540_5.cs" />
+    <Compile Remove="Migrations\20190322135540_5.Designer.cs" />
+    <Compile Remove="Migrations\20190322135638_ll.cs" />
+    <Compile Remove="Migrations\20190322135638_ll.Designer.cs" />
+    <Compile Remove="Migrations\20190322140130_ii.cs" />
+    <Compile Remove="Migrations\20190322140130_ii.Designer.cs" />
+    <Compile Remove="Migrations\20190322140340_zz.cs" />
+    <Compile Remove="Migrations\20190322140340_zz.Designer.cs" />
+    <Compile Remove="Migrations\20190322140349_ee.cs" />
+    <Compile Remove="Migrations\20190322140349_ee.Designer.cs" />
+    <Compile Remove="Migrations\20190322141625_897.cs" />
+    <Compile Remove="Migrations\20190322141625_897.Designer.cs" />
+    <Compile Remove="Migrations\20190322141953_hjk.cs" />
+    <Compile Remove="Migrations\20190322141953_hjk.Designer.cs" />
+    <Compile Remove="Migrations\20190322142545_63.cs" />
+    <Compile Remove="Migrations\20190322142545_63.Designer.cs" />
+    <Compile Remove="Migrations\20190322143010_123.cs" />
+    <Compile Remove="Migrations\20190322143010_123.Designer.cs" />
+    <Compile Remove="Migrations\20190322143302_7896.cs" />
+    <Compile Remove="Migrations\20190322143302_7896.Designer.cs" />
+    <Compile Remove="Migrations\20190322143420_poi.cs" />
+    <Compile Remove="Migrations\20190322143420_poi.Designer.cs" />
+    <Compile Remove="Migrations\20190322143521_mm9.cs" />
+    <Compile Remove="Migrations\20190322143521_mm9.Designer.cs" />
+    <Compile Remove="Migrations\20190322143711_ty.cs" />
+    <Compile Remove="Migrations\20190322143711_ty.Designer.cs" />
+    <Compile Remove="Migrations\20190322144434_hjgfgjh.cs" />
+    <Compile Remove="Migrations\20190322144434_hjgfgjh.Designer.cs" />
+    <Compile Remove="Migrations\20190322145426_45698.cs" />
+    <Compile Remove="Migrations\20190322145426_45698.Designer.cs" />
+    <Compile Remove="Migrations\20190325123315_23m.cs" />
+    <Compile Remove="Migrations\20190325123315_23m.Designer.cs" />
+    <Compile Remove="Migrations\20190325123558_jhu.cs" />
+    <Compile Remove="Migrations\20190325123558_jhu.Designer.cs" />
+    <Compile Remove="Migrations\20190325124028_iop.cs" />
+    <Compile Remove="Migrations\20190325124028_iop.Designer.cs" />
+    <Compile Remove="Migrations\20190325124345_lkjhg.cs" />
+    <Compile Remove="Migrations\20190325124345_lkjhg.Designer.cs" />
+    <Compile Remove="Migrations\20190325124718_kjhu.cs" />
+    <Compile Remove="Migrations\20190325124718_kjhu.Designer.cs" />
+    <Compile Remove="Migrations\20190325125726_584632.cs" />
+    <Compile Remove="Migrations\20190325125726_584632.Designer.cs" />
+    <Compile Remove="Migrations\20190325130810_jhgfd.cs" />
+    <Compile Remove="Migrations\20190325130810_jhgfd.Designer.cs" />
+    <Compile Remove="Migrations\20190325131503_hgfdv.cs" />
+    <Compile Remove="Migrations\20190325131503_hgfdv.Designer.cs" />
+    <Compile Remove="Migrations\20190325131841_nbhjk.cs" />
+    <Compile Remove="Migrations\20190325131841_nbhjk.Designer.cs" />
+    <Compile Remove="Migrations\20190328083933_adding_duration_field_in_concert.cs" />
+    <Compile Remove="Migrations\20190328083933_adding_duration_field_in_concert.Designer.cs" />
+    <Compile Remove="Migrations\20190328092209_change-checkpoint.cs" />
+    <Compile Remove="Migrations\20190328092209_change-checkpoint.Designer.cs" />
+    <Compile Remove="Migrations\20190328132302_checkpoint-change1.cs" />
+    <Compile Remove="Migrations\20190328132302_checkpoint-change1.Designer.cs" />
+    <Compile Remove="Migrations\20190328161854_add-team-members.cs" />
+    <Compile Remove="Migrations\20190328161854_add-team-members.Designer.cs" />
+    <Compile Remove="Migrations\20190404143949_change-user.cs" />
+    <Compile Remove="Migrations\20190404143949_change-user.Designer.cs" />
+    <Compile Remove="Migrations\CpContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\gestionContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GeoJSON.Net" Version="1.1.72" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
   </ItemGroup>
 
@@ -23,6 +127,17 @@
     <Reference Include="Microsoft.EntityFrameworkCore.Relational">
       <HintPath>..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.entityframeworkcore.relational\2.1.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.identitymodel.tokens\5.3.0\lib\netstandard2.0\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\system.identitymodel.tokens.jwt\5.3.0\lib\netstandard2.0\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helper\" />
+    <Folder Include="Transverse\" />
   </ItemGroup>
 
 </Project>

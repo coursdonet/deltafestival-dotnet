@@ -52,22 +52,4 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A7EC7042-3027-4100-9F26-73AAA5DB86AF}
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://195.200.178.233:8080/tfs/deltafestival
-		SccProjectUniqueName0 = BackOffice\\BackOffice.csproj
-		SccProjectTopLevelParentUniqueName0 = DeltaFestivalBackoffice.sln
-		SccProjectName0 = BackOffice
-		SccLocalPath0 = BackOffice
-		SccProjectUniqueName1 = Database\\Database.csproj
-		SccProjectTopLevelParentUniqueName1 = DeltaFestivalBackoffice.sln
-		SccProjectName1 = Database
-		SccLocalPath1 = Database
-		SccProjectUniqueName2 = Entities\\Entities.csproj
-		SccProjectTopLevelParentUniqueName2 = DeltaFestivalBackoffice.sln
-		SccProjectName2 = Entities
-		SccLocalPath2 = Entities
-		SccLocalPath3 = .
-	EndGlobalSection
 EndGlobal

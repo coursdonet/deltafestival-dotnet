@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,14 +21,14 @@ namespace WebApi.Controllers
             _context = context;
         }
 
-        // GET: api/Users
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/Users/5
+
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -42,7 +42,7 @@ namespace WebApi.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -72,8 +72,20 @@ namespace WebApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
-        [HttpPost]
+        [HttpGet("login/{TicketCode}")]
+        public async Task<ActionResult<User>> Login(String TicketCode)
+        {
+            User user = await _context.Users.Where(p => p.TicketCode == TicketCode).FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+        }
+
+        [HttpPost("register")]
         public async Task<ActionResult<User>> PostUser(User user)
         {
             _context.Users.Add(user);

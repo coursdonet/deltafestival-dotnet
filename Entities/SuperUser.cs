@@ -22,9 +22,8 @@ namespace Entities
         //Nombre de demission d'equipe
         [DefaultValue(0)]
         public int Resign { get; set; }
-
         public int UserRoleId { get; set; }
         [ForeignKey("UserRoleId")]
-        public UserRole UserRole { get; set; }
+        public virtual UserRole UserRole { get; set; }
     }
 }

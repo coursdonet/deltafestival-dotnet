@@ -37,7 +37,7 @@ namespace BackOffice
             services.AddMvcCore(options =>
               {
               });
-            services.AddDbContext<gestionContext>(options => options.UseSqlServer(
+            services.AddDbContext<EfContext>(options => options.UseSqlServer(
                     Configuration.GetConnectionString("FestivalDb")
                     , x => x.MigrationsAssembly("Database")));
        
@@ -69,7 +69,6 @@ namespace BackOffice
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-             ////  app.UseHsts();
             }
 
             //app.UseHttpsRedirection();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +10,11 @@ namespace Entities
     public class PlaceCategory
     {
         public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public float lat { get; set; }
+        public float longi { get; set; }
         //todo add posi
 
     }
