@@ -12,8 +12,8 @@ namespace WebApi.Controllers
     [ApiController]
     public class UserConcertController : Controller
     {
-        private readonly CpContext _context;
-        public UserConcertController(CpContext context) => _context = context;
+        private readonly EfContext _context;
+        public UserConcertController(EfContext context) => _context = context;
 
 
         [HttpGet]

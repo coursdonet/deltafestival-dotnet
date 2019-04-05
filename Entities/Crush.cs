@@ -7,6 +7,8 @@ namespace DeltaFestival.Models
 {
     public class Crush
     {
+        public int Id { get; set; }
+
         [Required]
         public int IdCurrentUser { get; set; }
 

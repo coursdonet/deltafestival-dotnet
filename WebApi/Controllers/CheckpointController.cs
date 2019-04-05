@@ -15,9 +15,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class CheckpointController : Controller
     {
-        private readonly CpContext _context;
+        private readonly EfContext _context;
 
-        public CheckpointController(CpContext context) => _context = context;
+        public CheckpointController(EfContext context) => _context = context;
 
         // GET: api/checkpoints
         [HttpGet]

@@ -15,9 +15,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class UserValidatedCheckPointController : Controller
     {
-        private readonly CpContext _context;
+        private readonly EfContext _context;
 
-        public UserValidatedCheckPointController(CpContext context)
+        public UserValidatedCheckPointController(EfContext context)
         {
             _context = context;
         }

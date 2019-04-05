@@ -10,15 +10,15 @@ namespace Entities
     {
         public int Id { get; set; }
 
-        public String UserName { get; set; }
+        public string UserName { get; set; }
 
         public int UserRoleId { get; set; }
         public virtual UserRole Role { get; set; }
 
         public int MoodId { get; set; }
-        public Mood ActualMood { get; set; }
+        public virtual Mood ActualMood { get; set; }
 
-        public ICollection<Publication> Publications { get; set; }
+        public virtual List<Publication> Publications { get; set; }
 
         public string TicketCode { get; set; }//index // unique
 

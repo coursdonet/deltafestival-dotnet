@@ -5,6 +5,7 @@ namespace DeltaFestival.Models
 {
     public class Ignored
     {
+        public int Id { get; set; }
         [Required]
         public int IdCurrentUser { get; set; }
 

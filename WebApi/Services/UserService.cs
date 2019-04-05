@@ -22,7 +22,7 @@ namespace WebApi.Services
 
     public class UserService 
     {
-        private readonly BrownContext _context;
+        private readonly EfContext _context;
 
         // users hardcoded for simplicity, store in a db with hashed passwords in production applications
         private List<User> _users;
@@ -30,7 +30,7 @@ namespace WebApi.Services
 
         private readonly AppSettings _appSettings;
 
-        public UserService(IOptions<AppSettings> appSettings, BrownContext context)
+        public UserService(IOptions<AppSettings> appSettings, EfContext context)
         {
             _appSettings = appSettings.Value;
             _context = context;

@@ -12,9 +12,9 @@ namespace BackOffice.Controllers
 {
     public class PhotosController : Controller
     {
-        private readonly gestionContext _context;
+        private readonly EfContext _context;
 
-        public PhotosController(gestionContext context)
+        public PhotosController(EfContext context)
         {
             _context = context;
         }

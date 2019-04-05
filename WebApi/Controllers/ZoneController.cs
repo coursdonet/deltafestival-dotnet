@@ -15,9 +15,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class ZoneController : ControllerBase
     {
-        private readonly MapContext _context;
+        private readonly EfContext _context;
 
-        public ZoneController(MapContext context) => _context = context;
+        public ZoneController(EfContext context) => _context = context;
 
 
         // GET: api/Zones

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +14,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class LocalizationsController : ControllerBase
     {
-        private readonly BrownContext _context;
+        private readonly EfContext _context;
 
-        public LocalizationsController(BrownContext context)
+        public LocalizationsController(EfContext context)
         {
             _context = context;
         }

@@ -15,9 +15,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class PlaceController : Controller
     {
-        private readonly MapContext _context;
+        private readonly EfContext _context;
 
-        public PlaceController(MapContext context) => _context = context;
+        public PlaceController(EfContext context) => _context = context;
 
         // GET: api/Place
         [HttpGet]

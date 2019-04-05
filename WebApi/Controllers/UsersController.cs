@@ -14,9 +14,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly CpContext _context;
+        private readonly EfContext _context;
 
-        public UsersController(CpContext context)
+        public UsersController(EfContext context)
         {
             _context = context;
         }

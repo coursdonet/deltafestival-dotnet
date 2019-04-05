@@ -17,9 +17,9 @@ namespace WebApi.Controllers
     public class AuthController : ControllerBase
     {
         private IUserService _userService;
-        private readonly BrownContext _context;
+        private readonly EfContext _context;
 
-        public AuthController(IUserService userService, BrownContext context)
+        public AuthController(IUserService userService, EfContext context)
         {
             _userService = userService;
             _context = context;

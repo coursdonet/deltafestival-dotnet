@@ -15,9 +15,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class TeamCheckpointController : Controller
     {
-        private readonly CpContext _context;
+        private readonly EfContext _context;
 
-        public TeamCheckpointController(CpContext context)
+        public TeamCheckpointController(EfContext context)
         {
             _context = context;
         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +14,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class MoodsController : ControllerBase
     {
-        private readonly BrownContext _context;
+        private readonly EfContext _context;
 
-        public MoodsController(BrownContext context)
+        public MoodsController(EfContext context)
         {
             _context = context;
         }
