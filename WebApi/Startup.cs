@@ -117,12 +117,13 @@ namespace WebApi
             services.AddDbContext<CpContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("CheckpointDb")
                 , x => x.MigrationsAssembly("Database")));
-
+            
             services.AddDbContext<BrownContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("BrownDb")
                 , x => x.MigrationsAssembly("Database")));
             #endregion
-
+            
+           
             //AutoMapper
             services.AddAutoMapper();   // Check out Configuration/AutoMapperProfiles/DefaultProfile to do actual configuration. See: https://github.com/drwatson1/AspNet-Core-REST-Service/wiki#automapper
 

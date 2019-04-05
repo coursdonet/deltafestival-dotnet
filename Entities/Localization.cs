@@ -20,13 +20,10 @@ namespace Entities
         public DateTime EmitTime { get; set; }
 
         public int UserId { get; set; }
-        public virtual User User { get; set; }
 
         public int UserTeamId { get; set; }
 
         public int ZoneId { get; set; }
-
-        public virtual Zone Zone { get; set; }
 
 
 

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations.Brown
 {
     [DbContext(typeof(BrownContext))]
-    [Migration("20190322090744_InitDatabase")]
-    partial class InitDatabase
+    [Migration("20190405102507_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,9 @@ namespace Database.Migrations.Brown
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
                     b.Property<DateTime>("EmitTime");
 
@@ -40,11 +43,9 @@ namespace Database.Migrations.Brown
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("ZoneId");
-
                     b.ToTable("Localizations");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Localization");
                 });
 
             modelBuilder.Entity("Entities.Mood", b =>
@@ -52,6 +53,8 @@ namespace Database.Migrations.Brown
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Label");
 
                     b.HasKey("Id");
 
@@ -113,6 +116,19 @@ namespace Database.Migrations.Brown
                     b.ToTable("TeamMembers");
                 });
 
+            modelBuilder.Entity("Entities.TestEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Label");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tests");
+                });
+
             modelBuilder.Entity("Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -123,12 +139,18 @@ namespace Database.Migrations.Brown
 
                     b.Property<int>("Demission");
 
+                    b.Property<string>("Email");
+
                     b.Property<bool>("IsActive");
 
                     b.Property<int>("MoodId");
 
+                    b.Property<string>("Password");
+
                     b.Property<string>("TicketCode")
                         .HasMaxLength(50);
+
+                    b.Property<string>("Token");
 
                     b.Property<int>("UserRoleId");
 
@@ -154,28 +176,11 @@ namespace Database.Migrations.Brown
                     b.ToTable("UserRole");
                 });
 
-            modelBuilder.Entity("Entities.Zone", b =>
+            modelBuilder.Entity("Entities.ArchiveLocalization", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.HasBaseType("Entities.Localization");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Zone");
-                });
-
-            modelBuilder.Entity("Entities.Localization", b =>
-                {
-                    b.HasOne("Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Entities.Zone", "Zone")
-                        .WithMany()
-                        .HasForeignKey("ZoneId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasDiscriminator().HasValue("ArchiveLocalization");
                 });
 
             modelBuilder.Entity("Entities.Publication", b =>

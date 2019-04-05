@@ -11,6 +11,9 @@ using Database;
 
 namespace WebApi.Controllers
 {
+    /*
+     * AuthController, controller which manage authentification
+     */
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
@@ -25,6 +28,9 @@ namespace WebApi.Controllers
             _context = context;
         }
 
+        /*
+         * Route for user authentification based on email and password with JWT mechanism
+         */
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]User userParam)
@@ -53,6 +59,40 @@ namespace WebApi.Controllers
             return Ok(user);
         }
 
+        /*
+        * Route for user authentification based on User.Id without JWT
+        */
+        [AllowAnonymous]
+        [HttpPost("authenticateId")]
+        public IActionResult AuthenticateId([FromBody]User userParams)
+        {
+            var user = _userService.AuthenticateId(userParams.Id);
+            if (user == null)
+                return BadRequest(new { message = "Email password is incorrect" });
+
+            return Ok(user);     
+        }
+        /*
+        * Route for user authentification based on email without JWT
+        */
+        [AllowAnonymous]
+        [HttpPost("authenticateEmail")]
+        public IActionResult AuthenticateString([FromBody]User userParams)
+        {
+           
+            var user = _userService.AuthenticateEmail(userParams.Email);
+
+            if (user == null)
+                return BadRequest(new { message = "Email password is incorrect" }); 
+
+            return Ok(user);
+
+
+        }
+
+        /*
+        *  Route to get All users for authenfied request on JWT
+        */
         [HttpGet]
         public IActionResult GetAll()
         {

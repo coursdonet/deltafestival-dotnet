@@ -4,16 +4,35 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Database.Migrations.Brown
 {
-    public partial class InitDatabase : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Localizations",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Longitude = table.Column<double>(nullable: false),
+                    Latitude = table.Column<double>(nullable: false),
+                    EmitTime = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    UserTeamId = table.Column<int>(nullable: false),
+                    ZoneId = table.Column<int>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Localizations", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Mood",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Label = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,6 +70,19 @@ namespace Database.Migrations.Brown
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Label = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tests", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserRole",
                 columns: table => new
                 {
@@ -64,23 +96,14 @@ namespace Database.Migrations.Brown
                 });
 
             migrationBuilder.CreateTable(
-                name: "Zone",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Zone", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Email = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    Token = table.Column<string>(nullable: true),
                     UserRoleId = table.Column<int>(nullable: false),
                     MoodId = table.Column<int>(nullable: false),
                     TicketCode = table.Column<string>(maxLength: 50, nullable: true),
@@ -106,35 +129,6 @@ namespace Database.Migrations.Brown
                 });
 
             migrationBuilder.CreateTable(
-                name: "Localizations",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Longitude = table.Column<double>(nullable: false),
-                    Latitude = table.Column<double>(nullable: false),
-                    EmitTime = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    UserTeamId = table.Column<int>(nullable: false),
-                    ZoneId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Localizations", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Localizations_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Localizations_Zone_ZoneId",
-                        column: x => x.ZoneId,
-                        principalTable: "Zone",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Publication",
                 columns: table => new
                 {
@@ -155,16 +149,6 @@ namespace Database.Migrations.Brown
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Localizations_UserId",
-                table: "Localizations",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Localizations_ZoneId",
-                table: "Localizations",
-                column: "ZoneId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Publication_UserId",
@@ -197,7 +181,7 @@ namespace Database.Migrations.Brown
                 name: "TeamMembers");
 
             migrationBuilder.DropTable(
-                name: "Zone");
+                name: "Tests");
 
             migrationBuilder.DropTable(
                 name: "Users");

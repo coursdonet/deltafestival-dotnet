@@ -19,12 +19,12 @@ namespace Database
         public virtual DbSet<Team> Team { get; set; }
         public virtual DbSet<TeamMembers> TeamMembers { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             //modelBuilder.Entity<User>().HasKey(p=>p.Id);
+           
             modelBuilder.ApplyConfiguration(new UserMap());
+           
         }
 
     }

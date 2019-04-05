@@ -17,6 +17,8 @@ namespace WebApi.Services
     public interface IUserService
     {
         User Authenticate(string username, string password);
+        User AuthenticateId(int idCode);
+        User AuthenticateEmail(string Email);
         IEnumerable<User> GetAll();
     }
 
@@ -69,7 +71,19 @@ namespace WebApi.Services
         }
 
         // TODO authenticate with qrcode
-        //   public User AuthenticateID(String code)
+        
+        public User AuthenticateId(int idCode)
+        {
+            var user = _users.SingleOrDefault(x => x.Id == idCode);
+            return user;
+
+        }
+        public User AuthenticateEmail(string Email)
+        {
+            var user = _users.SingleOrDefault(x => x.Email == Email);
+            return user;
+
+        }
 
 
         public IEnumerable<User> GetAll()
