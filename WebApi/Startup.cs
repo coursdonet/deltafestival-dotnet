@@ -20,6 +20,8 @@ using System.Reflection;
 using System.Text;
 using WebApi.Filters;
 using WebApi.Helpers;
+using WebApi.Interfaces;
+using WebApi.Repository;
 using WebApi.Services;
 
 namespace WebApi
@@ -173,7 +175,11 @@ namespace WebApi
             services.Add(new ServiceDescriptor(typeof(IMoodRepository), typeof(MoodRepository), ServiceLifetime.Transient));
             services.Add(new ServiceDescriptor(typeof(IPublicationRepository), typeof(PublicationRepository), ServiceLifetime.Transient));
             services.Add(new ServiceDescriptor(typeof(IRoleRepository), typeof(RoleRepository), ServiceLifetime.Transient));
-            services.Add(new ServiceDescriptor(typeof(IUserRepository), typeof(UserRepository), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(DeltaFestival.IRepository.IUserRepository), typeof(DeltaFestival.Repository.UserRepository), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepositoryWrapper), typeof(RepositoryWrapper), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(ICrushRepository), typeof(CrushRepository), ServiceLifetime.Transient));
+            //services.Add(new ServiceDescriptor(typeof(IIgnoredRepository), typeof(Ignored), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IMoodRepository), typeof(MoodRepository), ServiceLifetime.Transient));
             //services.Add(new ServiceDescriptor(typeof()))
 
             // configure DI for application services
