@@ -25,33 +25,33 @@ namespace WebApi.Controllers
             _context = context;
         }
 
-        [AllowAnonymous]
-        [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]User userParam)
-        {
-            /*
-            User userT = new User();
-            //{ Email = "Test@test.fr", Password = "test" };
-            userT.Email = "Test@test.fr";
-            userT.Password = "test";
-            userT.UserRoleId = 1;
-            userT.MoodId = 0;
-            userT.TicketCode = "ticket1";
-            userT.CanPublish = true;
-            userT.Demission = 1;
-            userT.IsActive = true;
-            userT.Token = "token";
-            _context.Add(userT);
-            _context.SaveChanges();
-            */
+        //[AllowAnonymous]
+        //[HttpPost("authenticate")]
+        //public IActionResult Authenticate([FromBody]User userParam)
+        //{
+        //    /*
+        //    User userT = new User();
+        //    //{ Email = "Test@test.fr", Password = "test" };
+        //    userT.Email = "Test@test.fr";
+        //    userT.Password = "test";
+        //    userT.UserRoleId = 1;
+        //    userT.MoodId = 0;
+        //    userT.TicketCode = "ticket1";
+        //    userT.CanPublish = true;
+        //    userT.Demission = 1;
+        //    userT.IsActive = true;
+        //    userT.Token = "token";
+        //    _context.Add(userT);
+        //    _context.SaveChanges();
+        //    */
 
-            var user = _userService.Authenticate(userParam.Email, userParam.Password);
+        //    //var user = _userService.Authenticate(userParam.Email, userParam.Password);
 
-            if (user == null)
-                return BadRequest(new { message = "Email password is incorrect" });
+        //    if (user == null)
+        //        return BadRequest(new { message = "Email password is incorrect" });
 
-            return Ok(user);
-        }
+        //    return Ok(user);
+        //}
 
         [HttpGet]
         public IActionResult GetAll()

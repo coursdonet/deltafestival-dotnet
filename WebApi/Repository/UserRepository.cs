@@ -19,7 +19,7 @@ namespace WebApi.Repository
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
             var users = await FindAllAsync();
-            return users.OrderBy(x => x.Pseudo);
+            return users.OrderBy(x => x.TicketCode);
         }
 
         public async Task<User> GetUserByIdAsync(int id)

@@ -17,7 +17,7 @@ namespace DeltaFestivalAPI.Transverse
             {
                 Mood m = new Mood();
                 m.Id = i;
-                m.Label = "Mood  N°" + i;
+                //m. = "Mood  N°" + i;
                 moods.Add(m);
             }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GeoJSON.Net.Converters;
+using GeoJSON.Net.Exceptions;
 using Newtonsoft.Json;
 
 namespace GeoJSON.Net.Geometry

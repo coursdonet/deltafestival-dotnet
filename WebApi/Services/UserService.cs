@@ -20,7 +20,7 @@ namespace WebApi.Services
         IEnumerable<User> GetAll();
     }
 
-    public class UserService : IUserService
+    public class UserService 
     {
         private readonly BrownContext _context;
 
@@ -38,47 +38,44 @@ namespace WebApi.Services
             _users = _context.Users.ToList();
         }
 
-        public User Authenticate(string email, string password)
-        {
+        //public User Authenticate(string email, string password)
+        //{
 
-            var user = _users.SingleOrDefault(x => x.Email == email && x.Password == password);
+        //    var user = _users.SingleOrDefault(x => x.Email == email && x.Password == password);
 
-            // return null if user not found
-            if (user == null)
-                return null;
+        //    // return null if user not found
+        //    if (user == null)
+        //        return null;
 
-            // authentication successful so generate jwt token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
+        //    // authentication successful so generate jwt token
+        //    var tokenHandler = new JwtSecurityTokenHandler();
+        //    var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+        //    var tokenDescriptor = new SecurityTokenDescriptor
+        //    {
+        //        Subject = new ClaimsIdentity(new Claim[]
+        //        {
+        //            new Claim(ClaimTypes.Name, user.Id.ToString())
+        //        }),
+        //        Expires = DateTime.UtcNow.AddDays(7),
+        //        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+        //    };
+        //    var token = tokenHandler.CreateToken(tokenDescriptor);
+        //    user.Token = tokenHandler.WriteToken(token);
 
-            // remove password before returning
-            user.Password = null;
+        //    // remove password before returning
+        //    user.Password = null;
 
-            return user;
-        }
+        //    return user;
+        //}
 
         // TODO authenticate with qrcode
         //   public User AuthenticateID(String code)
 
 
-        public IEnumerable<User> GetAll()
+        public List<User> GetAll()
         {
             // return users without passwords
-            return _users.Select(x => {
-                x.Password = null;
-                return x;
-            });
+            return _users.ToList();
         }
     }
 }

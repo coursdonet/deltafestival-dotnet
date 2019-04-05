@@ -69,7 +69,7 @@ namespace DeltaFestival.Controllers
                 Mood olderMood = _moodRepository.FindBy(c => c.Id == mood.Id).FirstOrDefault();
 
                 #region Edit properties
-                olderMood.Label = mood.Label;
+                //olderMood.Label = mood.Label;
                 #endregion
 
                 _moodRepository.Save();
