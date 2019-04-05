@@ -11,6 +11,7 @@ namespace WebApi.Repository
         private IRankingRepository _ranking;
         private IContexteRepository _contexte;
         private IUserValidatedCheckpointsRepository _userValidatedCheckpoints;
+        private IPreventionRepository _prevention;
 
         public RepositoryWrapper(EfContext context)
         {
@@ -82,5 +83,17 @@ namespace WebApi.Repository
             }
         }
 
+        public IPreventionRepository Prevention
+        {
+            get
+            {
+                if (_prevention == null)
+                {
+                    _prevention = new PreventionRepository(_efContext);
+                }
+
+                return _prevention;
+            }
+        }
     }
 }

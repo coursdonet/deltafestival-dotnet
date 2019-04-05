@@ -7,5 +7,6 @@ namespace WebApi.Interfaces
         IRankingRepository Ranking { get; }
         IUserValidatedCheckpointsRepository UserValidatedCheckpoints { get; }
         IContexteRepository Contexte { get; }
+        IPreventionRepository Prevention { get; }
     }
 }
