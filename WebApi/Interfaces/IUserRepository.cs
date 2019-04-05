@@ -10,6 +10,7 @@ namespace WebApi.Interfaces
     {
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> GetUserByIdAsync(int id);
+        Task<User> GetUserByTicketAsync(string ticket);
         Task CreateUserAsync(User user);
         Task UpdateUserAsync(User user);
         Task DeleteUserAsync(User user);

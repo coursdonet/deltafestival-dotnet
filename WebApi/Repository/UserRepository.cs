@@ -28,6 +28,12 @@ namespace WebApi.Repository
             return user.DefaultIfEmpty(new User()).FirstOrDefault();
         }
 
+        public async Task<User> GetUserByTicketAsync(string ticket)
+        {
+            var user = await FindByConditionAsync(o => o.TicketCode.Equals(ticket));
+            return user.DefaultIfEmpty(new User()).FirstOrDefault();
+        }
+
         public async Task CreateUserAsync(User user)
         {
             Create(user);

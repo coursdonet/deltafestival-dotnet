@@ -18,9 +18,9 @@ namespace WebApi.Services
         public async Task AddPointsValidateCheckPoint(int id)
         {
 
-            await repository.Contexte.CheckAndUpdateStreak(id);
+            await repository.Contexte.CheckAndUpdateStreakAsync(id);
 
-            int streak = await repository.Contexte.getSteak();
+            int streak = await repository.Contexte.getSteakAsync();
 
             await repository.Ranking.AddPointAsync(id, CHECKPOINT_POINT * streak);
 

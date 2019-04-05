@@ -15,7 +15,7 @@ namespace WebApi.Repository
         {
         }
 
-        public async Task CheckAndUpdateStreak(int teamId)
+        public async Task CheckAndUpdateStreakAsync(int teamId)
         {
 
             //Definir les noms des clés en BBD.
@@ -41,7 +41,7 @@ namespace WebApi.Repository
             }
         }
 
-        public async Task<int> getSteak()
+        public async Task<int> getSteakAsync()
         {
             Contexte lenghtStreak = new Contexte();
             var contexte = await GetContexte();
