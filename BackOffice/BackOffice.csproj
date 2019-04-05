@@ -13,6 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\delta-pic.jpg" />
+    <None Include="wwwroot\images\logo_delta.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="DotNetEnv" Version="1.2.0" />
     <PackageReference Include="GeoJSON.Net" Version="1.1.72" />
