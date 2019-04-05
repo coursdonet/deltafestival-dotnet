@@ -30,7 +30,7 @@ namespace WebApi.Controllers
 
         // GET: api/Teams/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Team>> GetTeam(int id)
+        public async Task<ActionResult<Team>> GetTeamById(int id)
         {
             var team = await _context.Teams.FindAsync(id);
 

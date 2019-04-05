@@ -10,11 +10,7 @@ namespace Entities
     {
         public int Id { get; set; }
 
-        //  public string Email { get; set; }
-
-        //  public string Password { get; set; }
-
-        //  public string Pseudo { get; set; }
+        public String UserName { get; set; }
 
         public int UserRoleId { get; set; }
         public virtual UserRole Role { get; set; }
@@ -32,6 +28,13 @@ namespace Entities
 
         public bool IsActive { get; set; }
 
-
+        public User ()
+        {
+            MoodId = 1;
+            UserRoleId = 1;
+            Demission = 0;
+            CanPublish = true;
+            IsActive = true;
+        }
     }
 }

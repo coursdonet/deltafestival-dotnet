@@ -24,9 +24,14 @@ namespace WebApi.Controllers
 
         //Return all subscribed concerts from an user id
         [HttpGet("{userId}")]
-        public async Task<ActionResult<IEnumerable<UserConcert>>> GetUserConcertsItems(int userId)
+        public async Task<ActionResult<IEnumerable<UserConcert>>> GetUserConcertsById(int userId)
         {
-            var find = await _context.UserConcerts.Where(r => r.UserId == userId).ToListAsync();
+            List<UserConcert> find = await _context.UserConcerts.Where(r => r.UserId == userId).ToListAsync();
+
+            foreach (UserConcert userConcert in find)
+            {
+                userConcert.Concert = _context.Concert.Find(userConcert.ConcertId);
+            }
 
             if (find == null)
             {
