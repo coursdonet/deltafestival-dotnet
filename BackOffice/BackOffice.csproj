@@ -13,6 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\delta-pic.jpg" />
+    <None Include="wwwroot\images\logo_delta.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="DotNetEnv" Version="1.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -23,6 +28,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Database\Database.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Pics\" />
   </ItemGroup>
 
 </Project>
