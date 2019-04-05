@@ -12,9 +12,9 @@ namespace BackOffice.Controllers
 {
     public class PublicationsController : Controller
     {
-        private readonly gestionContext _context;
+        private readonly EfContext _context;
 
-        public PublicationsController(gestionContext context)
+        public PublicationsController(EfContext context)
         {
             _context = context;
         }

@@ -12,9 +12,9 @@ namespace BackOffice.Controllers
 {
     public class UserRolesController : Controller
     {
-        private readonly gestionContext _context;
+        private readonly EfContext _context;
          
-        public UserRolesController(gestionContext context)
+        public UserRolesController(EfContext context)
         {
             _context = context;
         }

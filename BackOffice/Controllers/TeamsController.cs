@@ -12,9 +12,9 @@ namespace BackOffice.Controllers
 {
     public class TeamsController : Controller
     {
-        private readonly gestionContext _context;
+        private readonly EfContext _context;
 
-        public TeamsController(gestionContext context)
+        public TeamsController(EfContext context)
         {
             _context = context;
         }

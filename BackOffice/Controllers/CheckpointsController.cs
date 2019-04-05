@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,9 +12,9 @@ namespace BackOffice.Controllers
 {
     public class CheckpointsController : Controller
     {
-        private readonly gestionContext _context;
+        private readonly EfContext _context;
 
-        public CheckpointsController(gestionContext context)
+        public CheckpointsController(EfContext context)
         {
             _context = context;
         }

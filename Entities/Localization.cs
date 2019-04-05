@@ -16,6 +16,7 @@ namespace Entities
         //lat
         //date
         public int UserId { get; set; }
+
         public virtual User User { get; set; }
 
         public int UserTeamId { get; set; }

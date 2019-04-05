@@ -12,9 +12,9 @@ namespace BackOffice.Controllers
 {
     public class SuperUsersController : Controller
     {
-        private readonly gestionContext _context;
+        private readonly EfContext _context;
 
-        public SuperUsersController(gestionContext context)
+        public SuperUsersController(EfContext context)
         {
             _context = context;
         }
