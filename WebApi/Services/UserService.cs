@@ -14,14 +14,22 @@ using Database;
 
 namespace WebApi.Services
 {
+    /*
+     * Interface for service authentification
+     */
     public interface IUserService
     {
         User Authenticate(string username, string password);
         User AuthenticateId(int idCode);
         User AuthenticateEmail(string Email);
+        User AuthenticateTicket(string ticket);
         IEnumerable<User> GetAll();
     }
 
+    /*
+     * Class Service for authentification
+     * 
+     */
     public class UserService : IUserService
     {
         private readonly BrownContext _context;
@@ -40,6 +48,9 @@ namespace WebApi.Services
             _users = _context.Users.ToList();
         }
 
+        /*
+         * Auth. by Email and Password on JWT
+         */
         public User Authenticate(string email, string password)
         {
 
@@ -70,14 +81,21 @@ namespace WebApi.Services
             return user;
         }
 
-        // TODO authenticate with qrcode
-        
+        /*
+         * Auth. with User'sId
+         * 
+         */
         public User AuthenticateId(int idCode)
         {
             var user = _users.SingleOrDefault(x => x.Id == idCode);
             return user;
 
         }
+        
+        /*
+         * Auth with User's Email
+         * 
+         */
         public User AuthenticateEmail(string Email)
         {
             var user = _users.SingleOrDefault(x => x.Email == Email);
@@ -85,7 +103,19 @@ namespace WebApi.Services
 
         }
 
+        /*
+        * Auth with User's Ticket
+        * 
+        */
+        public User AuthenticateTicket(string ticket)
+        {
+            var user = _users.SingleOrDefault(x => x.TicketCode == ticket);
+            return user;
+        }
 
+        /*
+         *  Service function to get all users
+         */
         public IEnumerable<User> GetAll()
         {
             // return users without passwords

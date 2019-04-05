@@ -54,7 +54,7 @@ namespace WebApi.Controllers
             var user = _userService.Authenticate(userParam.Email, userParam.Password);
 
             if (user == null)
-                return BadRequest(new { message = "Email password is incorrect" });
+                return BadRequest(new { message = "Email or password is incorrect" });
 
             return Ok(user);
         }
@@ -68,28 +68,41 @@ namespace WebApi.Controllers
         {
             var user = _userService.AuthenticateId(userParams.Id);
             if (user == null)
-                return BadRequest(new { message = "Email password is incorrect" });
+                return BadRequest(new { message = "Id is incorrect" });
 
             return Ok(user);     
         }
         /*
-        * Route for user authentification based on email without JWT
+        * Route for user authentification based on email
         */
         [AllowAnonymous]
         [HttpPost("authenticateEmail")]
-        public IActionResult AuthenticateString([FromBody]User userParams)
+        public IActionResult AuthenticateEmail([FromBody]User userParams)
         {
            
             var user = _userService.AuthenticateEmail(userParams.Email);
 
             if (user == null)
-                return BadRequest(new { message = "Email password is incorrect" }); 
+                return BadRequest(new { message = "Email is incorrect" }); 
 
             return Ok(user);
-
-
         }
 
+        /*
+        * Route for user authentification based on ticket
+        */
+        [AllowAnonymous]
+        [HttpPost("authenticateTicket")]
+        public IActionResult AuthenticateTicket([FromBody]User userParams)
+        {
+
+            var user = _userService.AuthenticateTicket(userParams.TicketCode);
+
+            if (user == null)
+                return BadRequest(new { message = "Ticket is incorrect" });
+
+            return Ok(user);
+        }
         /*
         *  Route to get All users for authenfied request on JWT
         */
