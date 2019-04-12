@@ -23,7 +23,7 @@ namespace Database
         public virtual DbSet<Checkpoint> Checkpoints { get; set; }
         public virtual DbSet<TeamCheckpoints> TeamCheckpoints { get; set; }
         public virtual DbSet<UserValidatedCheckpoints> UserValidatedCheckpoints { get; set; }
-        public virtual DbSet<UserConcert> UserConcerts { get; set; }
+        public virtual DbSet<UserConcerts> UserConcert { get; set; }
         public virtual DbSet<Concert> Concert { get; set; }
         public virtual DbSet<ConcertLocation> ConcertLocation { get; set; }
         public virtual DbSet<SuperUser> SuperUser { get; set; }

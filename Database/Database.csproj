@@ -110,6 +110,14 @@
     <Compile Remove="Migrations\20190328161854_add-team-members.Designer.cs" />
     <Compile Remove="Migrations\20190404143949_change-user.cs" />
     <Compile Remove="Migrations\20190404143949_change-user.Designer.cs" />
+    <Compile Remove="Migrations\20190405152713_add-concert.cs" />
+    <Compile Remove="Migrations\20190407104702_change-concert1.cs" />
+    <Compile Remove="Migrations\20190407113106_change-concert2.cs" />
+    <Compile Remove="Migrations\20190407114016_change-concert1.cs" />
+    <Compile Remove="Migrations\20190407114855_change-concert1.cs" />
+    <Compile Remove="Migrations\20190407115402_change-concert1.cs" />
+    <Compile Remove="Migrations\20190407115926_change-concert2.cs" />
+    <Compile Remove="Migrations\20190407120533_change-concert2.cs" />
     <Compile Remove="Migrations\CpContextModelSnapshot.cs" />
     <Compile Remove="Migrations\gestionContextModelSnapshot.cs" />
   </ItemGroup>

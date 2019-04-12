@@ -4,14 +4,16 @@ using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Database.Migrations
 {
     [DbContext(typeof(EfContext))]
-    partial class EfContextModelSnapshot : ModelSnapshot
+    [Migration("20190407100756_change-concert")]
+    partial class changeconcert
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -363,7 +365,7 @@ namespace Database.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Entities.UserConcerts", b =>
+            modelBuilder.Entity("Entities.UserConcert", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -379,7 +381,7 @@ namespace Database.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserConcert");
+                    b.ToTable("UserConcerts");
                 });
 
             modelBuilder.Entity("Entities.UserRole", b =>
@@ -502,7 +504,7 @@ namespace Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Entities.UserConcerts", b =>
+            modelBuilder.Entity("Entities.UserConcert", b =>
                 {
                     b.HasOne("Entities.Concert", "Concert")
                         .WithMany()

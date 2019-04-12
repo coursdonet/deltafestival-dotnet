@@ -4,14 +4,16 @@ using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Database.Migrations
 {
     [DbContext(typeof(EfContext))]
-    partial class EfContextModelSnapshot : ModelSnapshot
+    [Migration("20190407115629_change-concert1")]
+    partial class changeconcert1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -363,23 +365,19 @@ namespace Database.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Entities.UserConcerts", b =>
+            modelBuilder.Entity("Entities.UserConcert", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserConcertId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ConcertId");
 
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserConcertId");
 
                     b.HasIndex("ConcertId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserConcert");
+                    b.ToTable("UserConcerts");
                 });
 
             modelBuilder.Entity("Entities.UserRole", b =>
@@ -502,16 +500,11 @@ namespace Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Entities.UserConcerts", b =>
+            modelBuilder.Entity("Entities.UserConcert", b =>
                 {
                     b.HasOne("Entities.Concert", "Concert")
                         .WithMany()
                         .HasForeignKey("ConcertId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

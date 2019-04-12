@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Database.Mapping
 {
-    public class UserConcertMap : IEntityTypeConfiguration<UserConcert>
+    public class UserConcertMap : IEntityTypeConfiguration<UserConcerts>
     {
-        public void Configure(EntityTypeBuilder<UserConcert> builder)
+        public void Configure(EntityTypeBuilder<UserConcerts> builder)
         {
-            builder.HasKey(p => new { p.UserId, p.ConcertId });
+            builder.HasKey(p => p.Id);
         }
     }
 }

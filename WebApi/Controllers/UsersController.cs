@@ -79,7 +79,7 @@ namespace WebApi.Controllers
 
             if (user == null)
             {
-                return NotFound();
+                return NotFound("Aucun compte n'a été créé pour ce ticket.");
             }
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
@@ -88,6 +88,10 @@ namespace WebApi.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            if (_context.Users.Where(p => p.TicketCode == user.TicketCode).Count() > 0)
+            {
+                return Unauthorized("Un compte a déjà été créé pour ce ticket.");
+            }
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 

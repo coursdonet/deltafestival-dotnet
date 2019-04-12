@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Entities;
 using Database;
+using System;
 
 namespace WebApi.Controllers
 {
@@ -17,21 +18,16 @@ namespace WebApi.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserConcert>>> GetUserConcertsItems()
+        public async Task<ActionResult<IEnumerable<UserConcerts>>> GetUserConcertsItems()
         {
-            return await _context.UserConcerts.ToListAsync();
+            return await _context.UserConcert.ToListAsync();
         }
 
         //Return all subscribed concerts from an user id
         [HttpGet("{userId}")]
-        public async Task<ActionResult<IEnumerable<UserConcert>>> GetUserConcertsById(int userId)
+        public async Task<ActionResult<IEnumerable<UserConcerts>>> GetUserConcertsById(int userId)
         {
-            List<UserConcert> find = await _context.UserConcerts.Where(r => r.UserId == userId).ToListAsync();
-
-            foreach (UserConcert userConcert in find)
-            {
-                userConcert.Concert = _context.Concert.Find(userConcert.ConcertId);
-            }
+            List<UserConcerts> find = await _context.UserConcert.Where(r => r.UserId == userId && r.Concert.Hour.AddMinutes(r.Concert.Duration) > DateTime.Now).Include(p => p.Concert).ThenInclude(p => p.ConcertLocation).OrderBy(p => p.Concert.Hour).ToListAsync();
 
             if (find == null)
             {
@@ -43,31 +39,34 @@ namespace WebApi.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<UserConcert>>> PostUserConcertItem(UserConcert item)
+        public async Task<ActionResult<IEnumerable<UserConcerts>>> PostUserConcertItem(UserConcerts item)
         {
             Concert concert = _context.Concert.Find(item.ConcertId);
-            if ( _context.UserConcerts.Where(r => r.UserId == item.UserId && concert.Hour >= r.Concert.Hour && concert.Hour < r.Concert.Hour.AddMinutes(r.Concert.Duration)).Count() > 0)
+            UserConcerts userConcert = _context.UserConcert.Where(r => r.UserId == item.UserId
+                && !(concert.Hour >= r.Concert.Hour.AddMinutes(r.Concert.Duration)
+                || concert.Hour.AddMinutes(concert.Duration) <= r.Concert.Hour)).Include(p => p.Concert).FirstOrDefault();
+            if (userConcert != null)
             {
-                return Unauthorized();
+                return Unauthorized("Tu crois vraiment pouvoir voir " + concert.Artist + " en même temps que " + userConcert.Concert.Artist + " ?" );
             }
 
-            _context.UserConcerts.Add(item);
+            _context.UserConcert.Add(item);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetUserConcertsItems), item);
         }
 
 
-        [HttpDelete("{concertId}")]
-        public async Task<IActionResult> DeleteUserConcertItem(int concertId, int userId)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUserConcertItem(int id)
         {
-            var item = await _context.UserConcerts.FindAsync(concertId, userId);
+            var item = await _context.UserConcert.FindAsync(id);
 
             if (item == null)
             {
                 return NotFound();
             }
 
-            _context.UserConcerts.Remove(item);
+            _context.UserConcert.Remove(item);
             await _context.SaveChangesAsync();
 
             return NoContent();

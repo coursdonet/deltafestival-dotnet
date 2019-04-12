@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
-    public class UserConcerts
+    public class UserConcert
     {
         public int Id { get; set; }
         public virtual User User { get; set; }
