@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="GeoJSONObject.cs" company="Joerg Battermann">
 //   Copyright © Joerg Battermann 2014
 // </copyright>
@@ -9,13 +9,13 @@
 
 using System.Linq;
 using System.Runtime.Serialization;
-using GeoJSON.Net.Converters;
-using GeoJSON.Net.CoordinateReferenceSystem;
-using GeoJSON.Net.Geometry;
+using WebApi.Geo.Converters;
+using WebApi.Geo.CoordinateReferenceSystem;
+using WebApi.Geo.Geometry;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace GeoJSON.Net
+namespace WebApi.Geo
 {
     /// <summary>
     ///     Base class for all IGeometryObject implementing types

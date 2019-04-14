@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MultiLineString.cs" company="Joerg Battermann">
 //   Copyright © Joerg Battermann 2014
 // </copyright>
@@ -9,10 +9,10 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using GeoJSON.Net.Converters;
+using WebApi.Geo.Converters;
 using Newtonsoft.Json;
 
-namespace GeoJSON.Net.Geometry
+namespace WebApi.Geo.Geometry
 {
     /// <summary>
     ///     Defines the <see cref="http://geojson.org/geojson-spec.html#multilinestring">MultiLineString</see> type.

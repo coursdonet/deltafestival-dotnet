@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
-namespace GeoJSON.Net
+namespace WebApi.Geo
 {
     /// <summary>
     ///     Compares doubles for equality.

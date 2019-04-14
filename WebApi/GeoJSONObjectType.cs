@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="GeoJSONObjectType.cs" company="Joerg Battermann">
 //   Copyright © Joerg Battermann 2014
 // </copyright>
@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace GeoJSON.Net
+namespace WebApi.Geo
 {
     /// <summary>
     /// Defines the GeoJSON Objects types as defined in the <see cref="http://geojson.org/geojson-spec.html#geojson-objects">geojson.org v1.0 spec</see>.

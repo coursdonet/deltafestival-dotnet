@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ProjectedPosition.cs" company="Joerg Battermann">
 //   Copyright © Joerg Battermann 2014
 // </copyright>
@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace GeoJSON.Net.Geometry
+namespace WebApi.Geo.Geometry
 {
     using System;
     using System.Globalization;

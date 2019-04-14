@@ -49,8 +49,6 @@ namespace WebApi.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(place).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();

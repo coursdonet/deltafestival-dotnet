@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Point.cs" company="Joerg Battermann">
 //   Copyright © Joerg Battermann 2014
 // </copyright>
@@ -8,10 +8,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using GeoJSON.Net.Converters;
+using WebApi.Geo.Converters;
 using Newtonsoft.Json;
 
-namespace GeoJSON.Net.Geometry
+namespace WebApi.Geo.Geometry
 {
     /// <summary>
     ///     In geography, a point refers to a Position on a map, expressed in latitude and longitude.

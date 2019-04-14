@@ -1,4 +1,4 @@
-﻿namespace GeoJSON.Net.Geometry
+namespace WebApi.Geo.Geometry
 {
     /// <summary>
     /// A position is the fundamental geometry construct. 

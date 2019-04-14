@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="GeographicPosition.cs" company="Joerg Battermann">
 //   Copyright © Joerg Battermann 2014
 // </copyright>
@@ -11,7 +11,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 
-namespace GeoJSON.Net.Geometry
+namespace WebApi.Geo.Geometry
 {
     /// <summary>
     ///     Defines the Geographic Position type a.k.a.

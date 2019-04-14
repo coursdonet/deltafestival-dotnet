@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="PolygonConverter.cs" company="Joerg Battermann">
 //   Copyright © Joerg Battermann 2014
 // </copyright>
@@ -9,10 +9,10 @@
 
 using System;
 using System.Collections.Generic;
-using GeoJSON.Net.Geometry;
+using WebApi.Geo.Geometry;
 using Newtonsoft.Json;
 
-namespace GeoJSON.Net.Converters
+namespace WebApi.Geo.Converters
 {
     /// <summary>
     ///     Converter to read and write the <see cref="Polygon" /> type.

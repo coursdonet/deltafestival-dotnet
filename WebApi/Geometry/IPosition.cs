@@ -1,5 +1,6 @@
-﻿using Newtonsoft.Json;
-namespace GeoJSON.Net.Geometry
+using Newtonsoft.Json;
+
+namespace WebApi.Geo.Geometry
 {
     //[JsonArray]
     public interface IPosition

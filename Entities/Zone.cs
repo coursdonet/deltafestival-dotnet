@@ -10,8 +10,8 @@ namespace Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        //public polygon
+        
+        public List<Place> Places { get; set; }
         //todo add geometry / polygone
     }
 }

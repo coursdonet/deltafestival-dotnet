@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using GeoJSON.Net.Geometry;
+using WebApi.Geo.Geometry;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace GeoJSON.Net.Converters
+namespace WebApi.Geo.Converters
 {
     /// <summary>
     /// Converter to read and write the <see cref="MultiPolygon" /> type.

@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GeoJSON.Net.Converters;
+using WebApi.Geo.Converters;
+using WebApi.Geo.Exceptions;
 using Newtonsoft.Json;
 
-namespace GeoJSON.Net.Geometry
+namespace WebApi.Geo.Geometry
 {
     /// <summary>
     /// 

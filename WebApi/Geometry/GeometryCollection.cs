@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="GeometryCollection.cs" company="Joerg Battermann">
 //   Copyright © Joerg Battermann 2014
 // </copyright>
@@ -10,10 +10,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GeoJSON.Net.Converters;
+using WebApi.Geo.Converters;
 using Newtonsoft.Json;
 
-namespace GeoJSON.Net.Geometry
+namespace WebApi.Geo.Geometry
 {
     /// <summary>
     ///     Defines the <see cref="http://geojson.org/geojson-spec.html#geometry-collection">GeometryCollection</see> type.
