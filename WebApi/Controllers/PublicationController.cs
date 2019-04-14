@@ -30,11 +30,16 @@ namespace DeltaFestival.Controllers
         [HttpGet]
         public List<Publication> GetAll()
         {
+            // On utilise des données bouchons pour faciliter le développement
             Bouchons b = new Bouchons();
-            return b.GetAllBouchonPublication();
+            // Remonter les publications "likés" en premier et trier par date
+            return b.GetAllBouchonPublication().OrderBy(x => x.Date).OrderBy(x => x.IsCoupDeCoeur).ToList();
 
             /* A décommenter pour mettre en prod */
-            //return _publicationRepository.GetAll().ToList();
+            // Remonter les publications "likés" en premier et trier par date
+            //return _publicationRepository.GetAll().OrderBy(x => x.Date).OrderBy(x => x.IsCoupDeCoeur).ToList();
+
+
         }
 
         // GET publication by id
@@ -44,7 +49,7 @@ namespace DeltaFestival.Controllers
             return _publicationRepository.FindBy(c => c.Id == id).FirstOrDefault();
         }
 
-        // TODO : Fonctionnalité de like de publication
+        
 
         // Insert publication
         [HttpPost]
@@ -53,8 +58,15 @@ namespace DeltaFestival.Controllers
             User user = _userRepository.FindBy(x => x.Id == publication.UserId).FirstOrDefault();
             try
             {
-                _publicationRepository.Add(publication);
-                _publicationRepository.Save();
+                // Vérification d'ajout de publication toutes les 10min
+                if(user.CanPublish == true) {
+                    _publicationRepository.Add(publication);
+                    _publicationRepository.Save();
+                } else
+                {
+                    return false;
+                }
+                
             }
             catch(Exception e)
             {
