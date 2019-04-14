@@ -14,9 +14,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class TeamsController : ControllerBase
     {
-        private readonly EfContext _context;
+        private readonly BrownContext _context;
 
-        public TeamsController(EfContext context)
+        public TeamsController(BrownContext context)
         {
             _context = context;
         }

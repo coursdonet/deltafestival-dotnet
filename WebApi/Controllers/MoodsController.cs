@@ -14,9 +14,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class MoodsController : ControllerBase
     {
-        private readonly EfContext _context;
+        private readonly BrownContext _context;
 
-        public MoodsController(EfContext context)
+        public MoodsController(BrownContext context)
         {
             _context = context;
         }
